@@ -50,8 +50,8 @@ function StorageState({ children }) {
   // }, [sendRequest]);
 
   const storageDeleteHandler = (deletedStorageId) => {
-    setStorages((prevPlaces) =>
-      prevPlaces.filter((place) => place.id !== deletedStorageId)
+    setStorages((prevStorages) =>
+      prevStorages.filter((storage) => storage.id !== deletedStorageId)
     );
   };
 

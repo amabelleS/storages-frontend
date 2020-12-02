@@ -7,10 +7,21 @@ import StorageList from '../components/StorageList';
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 
+import Input from '../shared/components/FormElements/Input';
+import Button from '../shared/components/FormElements/Button';
+
 export const Storages = () => {
   const [LoadedStorages, setLoadedStorages] = useState();
   const { sendRequest, isLoading, error, clearError } = useHttpClient();
   const { setStorages } = useContext(StorageContext);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   // const STORAGES = [
   //   {
   //     id: 's1',
@@ -40,6 +51,7 @@ export const Storages = () => {
         );
 
         setLoadedStorages(responseData.storages);
+        // console.log(responseData.storages);
         setStorages(responseData.storages);
       } catch (err) {
         console.log(err); // TOFIX!!!!!!!!!!!!
@@ -48,7 +60,24 @@ export const Storages = () => {
     fetchStorages();
   }, [sendRequest, setStorages]);
 
+  useEffect(() => {
+    if (LoadedStorages) {
+      const results = LoadedStorages.filter((storage) => {
+        if (
+          storage.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          storage.address.toLowerCase().includes(searchTerm.toLowerCase())
+        ) {
+          return storage;
+        }
+      });
+
+      setSearchResults(results);
+    }
+  }, [searchTerm]);
+
   // const storageDeleteHandler = () => {};
+
+  // const inputHandler = () => {};
 
   return (
     <React.Fragment>
@@ -58,9 +87,17 @@ export const Storages = () => {
           {isLoading && <LoadingSpinner asOverlay />}
         </div>
       )}
+      <div className="form-control place-form" style={{ marginBottom: '2rem' }}>
+        <input
+          type="text"
+          placeholder="Search by title or address"
+          value={searchTerm}
+          onChange={handleChange}
+        />
+      </div>
       {!isLoading && LoadedStorages && (
         <StorageList
-          items={LoadedStorages}
+          items={searchResults.length > 0 ? searchResults : LoadedStorages}
           error={error}
           onClear={clearError}
           // onDeleteStorage={storageDeleteHandler}

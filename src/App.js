@@ -13,6 +13,7 @@ import Storages from './pages/Storages';
 import Storage from './pages/Storage';
 import NewStorage from './pages/NewStorage';
 import UpdateStorage from './pages/UpdateStorage';
+import StorageItems from './pages/StorageItems';
 import Auth from './user/pages/Auth';
 
 import { StorageState } from './context/storages/StorageState';
@@ -39,6 +40,9 @@ function App() {
         <Route exact path="/:sid/update">
           <UpdateStorage />
         </Route>
+        <Route exact path="/:sid/items">
+          <StorageItems />
+        </Route>
         <Redirect to="/" />
       </Switch>
     );
@@ -53,6 +57,9 @@ function App() {
         </Route>
         <Route exact path="/:sid">
           <Storage />
+        </Route>
+        <Route exact path="/:sid/items">
+          <StorageItems />
         </Route>
         <Redirect to="/auth" />
       </Switch>
