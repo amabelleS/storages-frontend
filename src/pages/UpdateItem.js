@@ -18,82 +18,70 @@ import { AuthContext } from '../context/auth/Auth-context';
 
 import './StorageForm.css';
 
-// const MOCK_STORAGES = [
-//   {
-//     id: 's1',
-//     title: "eliyahu's storage",
-//     description: 'community storage',
-//     address: 'רחבת האיצטדיון, מול וינגייט 18',
-//     location: {
-//       lat: 32.0603126,
-//       lng: 34.7887586,
-//     },
-//     creator: 'u1',
-//     img:
-//       'https://scontent.ftlv8-1.fna.fbcdn.net/v/t1.0-9/74237778_481063296084612_5601605886289117184_n.jpg?_nc_cat=100&_nc_sid=e3f864&_nc_ohc=jSKEBBsjudYAX929Gas&_nc_ht=scontent.ftlv8-1.fna&oh=4ce3fc640df42b2d2efe7d6b45a3a48d&oe=5F9878FE',
-//   },
-//   {
-//     id: 's2',
-//     title: "Baba's storage",
-//     description: 'satlas joint',
-//     address: 'רחבת האיצטדיון, מול וינגייט 18',
-//     creator: 'u2',
-//     img:
-//       'https://scontent.ftlv8-1.fna.fbcdn.net/v/t1.0-9/74237778_481063296084612_5601605886289117184_n.jpg?_nc_cat=100&_nc_sid=e3f864&_nc_ohc=jSKEBBsjudYAX929Gas&_nc_ht=scontent.ftlv8-1.fna&oh=4ce3fc640df42b2d2efe7d6b45a3a48d&oe=5F9878FE',
-//   },
-// ];
-
-export const UpdateStorage = () => {
+export const UpdateItem = () => {
   const [isLoading, setIsLoading] = useState(true);
   const storageId = useParams().sid;
+  const itemId = useParams().itemId;
   const { error, clearError, sendRequest } = useHttpClient();
-  const { storages, storage } = useContext(StorageContext);
+  const { storages, storage, setStorage } = useContext(StorageContext);
   const auth = useContext(AuthContext);
 
   const history = useHistory();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
-      title: { value: '', isValid: false },
+      name: { value: '', isValid: false },
       description: { value: '', isValid: false },
+      rentCost: { value: '', isValid: false },
+      qntInStock: { value: '', isValid: false },
     },
     false
   );
 
-  const identifiedStorage = storages.find((s) => s.id === storageId);
+  //   console.log(storage);
+  //   const identifiedStorage = storages.find((s) => s.id === storageId);
+  const identifiedItem = storage.storageItems.find((i) => i.id === itemId);
 
   useEffect(() => {
-    if (identifiedStorage) {
+    if (identifiedItem && identifiedItem.length > 0) {
       setFormData(
         {
-          title: { value: identifiedStorage.title, isValid: true },
-          description: { value: identifiedStorage.description, isValid: true },
+          name: { value: identifiedItem.name, isValid: true },
+          description: { value: identifiedItem.description, isValid: true },
+          rentCost: { value: identifiedItem.rentCost, isValid: true },
+          qntInStock: { value: identifiedItem.qntInStock, isValid: true },
         },
         true
       );
     }
 
     setIsLoading(false);
-  }, [setFormData, identifiedStorage]);
+  }, [setFormData, identifiedItem]);
 
   const updateSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState.inputs);
+    // console.log(formState.inputs);
 
     try {
-      await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/storages/${storageId}`,
+      const responseData = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/storages/${storageId}/items/${itemId}`,
         'PATCH',
         JSON.stringify({
-          title: formState.inputs.title.value,
+          name: formState.inputs.name.value,
           description: formState.inputs.description.value,
+          rentCost: formState.inputs.rentCost.value,
+          qntInStock: formState.inputs.qntInStock.value,
         }),
         {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + auth.token,
         }
       );
-      history.push(`/${storageId}`);
+
+      console.log(responseData.storage);
+      //   setStorage(responseData.storage);
+      localStorage.setItem('storage', JSON.stringify(responseData.storage));
+      history.push(`/${storageId}/items`);
     } catch (err) {}
   };
 
@@ -105,11 +93,11 @@ export const UpdateStorage = () => {
     );
   }
 
-  if (!identifiedStorage) {
+  if (!identifiedItem) {
     return (
       <div className="center">
         <Card>
-          <h2>Could not find storage</h2>
+          <h2>Could not find item</h2>
         </Card>
       </div>
     );
@@ -118,17 +106,17 @@ export const UpdateStorage = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onclear={clearError} />
-      {!isLoading && identifiedStorage && (
+      {!isLoading && identifiedItem && (
         <form className="place-form" onSubmit={updateSubmitHandler}>
           <Input
-            id="title"
+            id="name"
             element="input"
             type="text"
-            label="title"
+            label="Name"
             validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter a valid title."
+            errorText="Please enter a valid item name."
             onInput={inputHandler}
-            initialValue={storage.title}
+            initialValue={identifiedItem.name}
             initialValid={true}
           />
           <Input
@@ -138,15 +126,37 @@ export const UpdateStorage = () => {
             validators={[VALIDATOR_MINLENGTH(5)]}
             errorText="Please enter a valid description (min. 5 characters)."
             onInput={inputHandler}
-            initialValue={storage.description}
+            initialValue={identifiedItem.description}
+            initialValid={true}
+          />
+          <Input
+            id="rentCost"
+            element="textarea"
+            label="Rent Cost"
+            validators={[VALIDATOR_REQUIRE()]}
+            type="number"
+            errorText="Please enter a valid number."
+            onInput={inputHandler}
+            initialValue={identifiedItem.rentCost}
+            initialValid={true}
+          />
+          <Input
+            id="qntInStock"
+            element="textarea"
+            label="Quantity In Stock"
+            validators={[VALIDATOR_REQUIRE()]}
+            type="number"
+            errorText="Please enter a valid number."
+            onInput={inputHandler}
+            initialValue={identifiedItem.qntInStock}
             initialValid={true}
           />
           <Button type="submit" disabled={!formState.isValid}>
-            UPDATE STORAGE
+            UPDATE ITEM
           </Button>
         </form>
       )}
     </React.Fragment>
   );
 };
-export default UpdateStorage;
+export default UpdateItem;

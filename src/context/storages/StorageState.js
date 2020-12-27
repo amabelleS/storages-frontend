@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import StorageContext from './StorageContext';
 // import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -55,6 +55,19 @@ function StorageState({ children }) {
     );
   };
 
+  const itemDeleteHandler = (storageId, itemId) => {
+    setStorages((prevStorages) =>
+      prevStorages
+        .find((storage) => storage.id === storageId)
+        .storageItems.filter((item) => item._id !== itemId)
+    );
+  };
+
+  const getStorageFromLocalStorage = useCallback(() => {
+    const fetchedStorage = JSON.parse(localStorage.getItem('stoeage'));
+    setStorage(fetchedStorage);
+  }, []);
+
   return (
     <StorageContext.Provider
       value={{
@@ -63,6 +76,8 @@ function StorageState({ children }) {
         storage,
         setStorage,
         storageDeleteHandler,
+        getStorageFromLocalStorage,
+        itemDeleteHandler,
       }}
     >
       {children}

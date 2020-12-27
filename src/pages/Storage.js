@@ -45,6 +45,12 @@ export const Storage = (props) => {
     fetchedStorage();
   }, [sendRequest, sid, setStorage, setLoadedStorage]);
 
+  useEffect(() => {
+    if (loadedStorage) {
+      localStorage.setItem('storage', JSON.stringify(loadedStorage));
+    }
+  }, [loadedStorage]);
+
   const openMapHandler = () => setShowMap(true);
 
   const closeMapHandler = () => setShowMap(false);
@@ -71,6 +77,10 @@ export const Storage = (props) => {
       storageDeleteHandler(loadedStorage.id);
       history.push('/');
     } catch (err) {}
+  };
+
+  const openItemList = () => {
+    history.push(`/${sid}/items`);
   };
 
   return (
@@ -131,15 +141,20 @@ export const Storage = (props) => {
               <Button inverse onClick={openMapHandler}>
                 VIEW ON MAP
               </Button>
+              <Button danger onClick={openItemList}>
+                STORAGE ITEMS
+              </Button>
+              <br />
               {auth.userId === loadedStorage.creator && (
-                <Button to={`/${loadedStorage.id}/update`}>EDIT</Button>
+                <Button enter to={`/${loadedStorage.id}/update`}>
+                  EDIT
+                </Button>
               )}
               {auth.userId === loadedStorage.creator && (
-                <Button danger onClick={showDeleteWarningHandler}>
+                <Button onClick={showDeleteWarningHandler}>
                   DELETE STORAGE
                 </Button>
               )}
-              {auth.isLoggedIn && <Button enter>RESERVE ITEM</Button>}
             </div>
           </Card>
         </article>

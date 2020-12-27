@@ -4,11 +4,10 @@ import StorageContext from '../context/storages/StorageContext';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import StorageList from '../components/StorageList';
 
+import Input from '../shared/components/FormElements/Input';
+
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
-
-import Input from '../shared/components/FormElements/Input';
-import Button from '../shared/components/FormElements/Button';
 
 export const Storages = () => {
   const [LoadedStorages, setLoadedStorages] = useState();
@@ -58,10 +57,12 @@ export const Storages = () => {
       }
     };
     fetchStorages();
-  }, [sendRequest, setStorages]);
+  }, [sendRequest, setStorages, setLoadedStorages]);
 
   useEffect(() => {
     if (LoadedStorages) {
+      localStorage.setItem('storages', JSON.stringify(LoadedStorages));
+
       const results = LoadedStorages.filter((storage) => {
         if (
           storage.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -73,7 +74,7 @@ export const Storages = () => {
 
       setSearchResults(results);
     }
-  }, [searchTerm]);
+  }, [searchTerm, LoadedStorages]);
 
   // const storageDeleteHandler = () => {};
 
@@ -98,8 +99,8 @@ export const Storages = () => {
       {!isLoading && LoadedStorages && (
         <StorageList
           items={searchResults.length > 0 ? searchResults : LoadedStorages}
-          error={error}
-          onClear={clearError}
+          // error={error}
+          // onClear={clearError}
           // onDeleteStorage={storageDeleteHandler}
         />
       )}

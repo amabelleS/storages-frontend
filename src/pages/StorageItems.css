@@ -1,0 +1,11 @@
+.search-and-add {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-item_button {
+  margin: 0 20% 1rem;
+}
