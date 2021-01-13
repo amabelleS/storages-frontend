@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+// NOT IN USE!! TO DELETE
+// import React, { useState, useCallback } from 'react';
 
-import StorageContext from './StorageContext';
+// import StorageContext from './StorageContext';
 // import { useHttpClient } from '../../shared/hooks/http-hook';
 
 // const MOCK_STORAGES = [
@@ -28,60 +29,54 @@ import StorageContext from './StorageContext';
 //   },
 // ];
 
-function StorageState({ children }) {
-  const [storages, setStorages] = useState();
-  const [storage, setStorage] = useState();
+// function StorageState({ children }) {
+//   const [storages, setStorages] = useState();
+//   const [storage, setStorage] = useState();
 
-  // const { sendRequest } = useHttpClient();
+//   const storageDeleteHandler = (deletedStorageId) => {
+//     setStorages((prevStorages) =>
+//       prevStorages.filter((storage) => storage.id !== deletedStorageId)
+//     );
+//   };
 
-  // useEffect(() => {
-  //   const fetchStorages = async () => {
-  //     try {
-  //       const responseData = await sendRequest(
-  //         'http://localhost:5000/api/storage'
-  //       );
+//   const itemDeleteHandler = (storageId, itemId) => {
+//     setStorages((prevStorages) =>
+//       prevStorages
+//         .find((storage) => storage.id === storageId)
+//         .storageItems.filter((item) => item._id !== itemId)
+//     );
+//     setStorage((prevStorage) =>
+//       prevStorage.storageItems.filter((item) => item.id !== itemId)
+//     );
+//   };
 
-  //       setLoadedStorages(responseData.storages);
-  //     } catch (err) {
-  //       // console.log(err); // TOFIX!!!!!!!!!!!!
-  //     }
-  //   };
-  //   fetchStorages();
-  // }, [sendRequest]);
+//   const getItemsLeft = (itemId) => {
+//     const item = storage.storageItems.find((item) => item.id === itemId);
+//     if (item) {
+//       return item.qntInStock - item.reservedBy.length;
+//     }
+//   };
 
-  const storageDeleteHandler = (deletedStorageId) => {
-    setStorages((prevStorages) =>
-      prevStorages.filter((storage) => storage.id !== deletedStorageId)
-    );
-  };
+//   const getStorageFromLocalStorage = useCallback(() => {
+//     const fetchedStorage = JSON.parse(localStorage.getItem('stoeage'));
+//     setStorage(fetchedStorage);
+//   }, []);
 
-  const itemDeleteHandler = (storageId, itemId) => {
-    setStorages((prevStorages) =>
-      prevStorages
-        .find((storage) => storage.id === storageId)
-        .storageItems.filter((item) => item._id !== itemId)
-    );
-  };
-
-  const getStorageFromLocalStorage = useCallback(() => {
-    const fetchedStorage = JSON.parse(localStorage.getItem('stoeage'));
-    setStorage(fetchedStorage);
-  }, []);
-
-  return (
-    <StorageContext.Provider
-      value={{
-        storages,
-        setStorages,
-        storage,
-        setStorage,
-        storageDeleteHandler,
-        getStorageFromLocalStorage,
-        itemDeleteHandler,
-      }}
-    >
-      {children}
-    </StorageContext.Provider>
-  );
-}
-export { StorageState };
+//   return (
+//     <StorageContext.Provider
+//       value={{
+//         storages,
+//         setStorages,
+//         storage,
+//         setStorage,
+//         storageDeleteHandler,
+//         getStorageFromLocalStorage,
+//         itemDeleteHandler,
+//         getItemsLeft,
+//       }}
+//     >
+//       {children}
+//     </StorageContext.Provider>
+//   );
+// }
+// export { StorageState };

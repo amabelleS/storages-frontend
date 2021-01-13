@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import StorageContext from '../context/storages/StorageContext';
+import Context from '../context/storages/cotext';
 import { AuthContext } from '../context/auth/Auth-context';
+
 import { useHttpClient } from '../shared/hooks/http-hook';
 
 import Card from '../shared/components/UIElements/Card';
@@ -17,18 +18,17 @@ import './Storage.css';
 
 export const Storage = (props) => {
   const auth = useContext(AuthContext);
-  const { sendRequest, isLoading, error, clearError } = useHttpClient();
-
-  const history = useHistory();
+  const { globalState, globalDispatch } = useContext(Context);
 
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [loadedStorage, setLoadedStorage] = useState();
 
+  const { sendRequest, isLoading, error, clearError } = useHttpClient();
+
+  const history = useHistory();
+
   const { sid } = useParams();
-  const { setStorage, storageDeleteHandler } = useContext(StorageContext);
-  // const storages = storages.find((s) => s.id === sid);
-  //   console.log(storage);
 
   useEffect(() => {
     const fetchedStorage = async () => {
@@ -37,13 +37,15 @@ export const Storage = (props) => {
           process.env.REACT_APP_BACKEND_URL + `/storages/${sid}`
         );
         setLoadedStorage(responseData.storage);
-        setStorage(responseData.storage);
+        globalDispatch({ type: 'set-storage', payload: responseData.storage });
+
         // console.log(responseData.storage);
       } catch (err) {}
     };
 
     fetchedStorage();
-  }, [sendRequest, sid, setStorage, setLoadedStorage]);
+    // console.log(globalState.storage);
+  }, [sendRequest, sid, setLoadedStorage]);
 
   useEffect(() => {
     if (loadedStorage) {
@@ -74,7 +76,7 @@ export const Storage = (props) => {
           Authorization: 'Bearer ' + auth.token,
         }
       );
-      storageDeleteHandler(loadedStorage.id);
+      // storageDeleteHandler(loadedStorage.id);
       history.push('/');
     } catch (err) {}
   };

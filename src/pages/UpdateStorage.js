@@ -13,7 +13,7 @@ import {
 } from '../shared/utils/validators';
 import { useForm } from '../shared/hooks/form-hook';
 
-import StorageContext from '../context/storages/StorageContext';
+import Context from '../context/storages/cotext';
 import { AuthContext } from '../context/auth/Auth-context';
 
 import './StorageForm.css';
@@ -44,10 +44,11 @@ import './StorageForm.css';
 // ];
 
 export const UpdateStorage = () => {
+  const { globalState, globalDispatch } = useContext(Context);
+  const { storages, storage } = globalState;
   const [isLoading, setIsLoading] = useState(true);
   const storageId = useParams().sid;
   const { error, clearError, sendRequest } = useHttpClient();
-  const { storages, storage } = useContext(StorageContext);
   const auth = useContext(AuthContext);
 
   const history = useHistory();

@@ -13,17 +13,18 @@ import {
 } from '../shared/utils/validators';
 import { useForm } from '../shared/hooks/form-hook';
 
-import StorageContext from '../context/storages/StorageContext';
+import Context from '../context/storages/cotext';
 import { AuthContext } from '../context/auth/Auth-context';
 
 import './StorageForm.css';
 
 export const UpdateItem = () => {
+  const { globalState, globalDispatch } = useContext(Context);
+  const { storage } = globalState;
   const [isLoading, setIsLoading] = useState(true);
   const storageId = useParams().sid;
   const itemId = useParams().itemId;
   const { error, clearError, sendRequest } = useHttpClient();
-  const { storages, storage, setStorage } = useContext(StorageContext);
   const auth = useContext(AuthContext);
 
   const history = useHistory();
@@ -80,6 +81,7 @@ export const UpdateItem = () => {
 
       console.log(responseData.storage);
       //   setStorage(responseData.storage);
+      globalDispatch({ type: 'set-storage', payload: responseData.storage });
       localStorage.setItem('storage', JSON.stringify(responseData.storage));
       history.push(`/${storageId}/items`);
     } catch (err) {}

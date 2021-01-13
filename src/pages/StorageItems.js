@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { useTransition, animated } from 'react-spring';
 
 import { AuthContext } from '../context/auth/Auth-context';
-import StorageContext from '../context/storages/StorageContext';
+import Context from '../context/storages/cotext';
 
 import { useHttpClient } from '../shared/hooks/http-hook';
 
@@ -15,9 +14,13 @@ import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 
 import './StorageItems.css';
 
-const StorageItems = (props) => {
-  const [fetchedStorage, setLocalStorage] = useState({});
-  const [storageItems, setStorageItems] = useState([]);
+export const StorageItems = (props) => {
+  const { globalState, globalDispatch } = useContext(Context);
+  const { storage } = globalState;
+  const [fetchedStorage, setfetchedStorage] = useState({});
+  const [storageItems, setStorageItems] = useState(
+    () => JSON.parse(localStorage.getItem('storage')).storageItems
+  );
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -28,43 +31,43 @@ const StorageItems = (props) => {
   const history = useHistory();
 
   // const [reserve, setReserve] = useState(false);
-  // const { sid } = useParams();
+  const { sid } = useParams();
 
-  const { storage, setStorage, itemDeleteHandler } = useContext(StorageContext);
+  // useEffect(() => {
+  //   const fetchedStorage = async () => {
+  //     try {
+  //       const responseData = await sendRequest(
+  //         process.env.REACT_APP_BACKEND_URL + `/storages/${sid}`
+  //       );
+  //       setfetchedStorage(responseData.storage);
+  //       setStorageItems(responseData.storage.storageItems);
+  //       // console.log(responseData.storage);
+  //     } catch (err) {}
+  //   };
 
-  // const [rows, set] = useState(storageItems);
-
-  // let height = 0;
-  // const transitions = useTransition(
-  //   rows.map((storageItems) => ({
-  //     ...storageItems,
-  //     y: (height += storageItems.height) - storageItems.height,
-  //   })),
-  //   (d) => d.name,
-  //   {
-  //     from: { height: 0, opacity: 0 },
-  //     leave: { height: 0, opacity: 0 },
-  //     enter: ({ y, height }) => ({ y, height, opacity: 1 }),
-  //     update: ({ y, height }) => ({ y, height }),
-  //   }
-  // );
-
-  // const fetchedStorage = localStorage.getItem('stoeage');
+  //   fetchedStorage();
+  // }, [sendRequest, sid, setfetchedStorage, setStorageItems]);
 
   useEffect(() => {
     // getStorageFromLocalStorage();
-    const data = localStorage.getItem('storage');
-    if (data) {
-      // console.log(data);
-      setStorage(JSON.parse(data));
-      setLocalStorage(JSON.parse(data));
+    if (storage) {
+      setfetchedStorage(storage);
+      setStorageItems(storage.storageItems);
+    } else {
+      const data = localStorage.getItem('storage');
+      if (data) {
+        // console.log(data);
+        globalDispatch({ type: 'set-storage', payload: JSON.parse(data) });
+        setfetchedStorage(JSON.parse(data));
+      }
     }
-  }, []);
+  }, [storage]);
 
   useEffect(() => {
-    if (fetchedStorage) {
+    if (storage) {
       // console.log(fetchedStorage);
-      setStorageItems(fetchedStorage.storageItems);
+      setfetchedStorage(storage);
+      setStorageItems(storage.storageItems);
     }
     if (storageItems) {
       const results = storageItems.filter((item) => {

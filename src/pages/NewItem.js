@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
+import Context from '../context/storages/cotext';
+
 import Input from '../shared/components/FormElements/Input';
 import {
   VALIDATOR_REQUIRE,
@@ -18,6 +20,7 @@ import { AuthContext } from '../context/auth/Auth-context';
 import '../pages/StorageForm.css';
 
 export const NewItem = () => {
+  const { globalDispatch } = useContext(Context);
   const auth = useContext(AuthContext);
   const { sid } = useParams();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -72,7 +75,10 @@ export const NewItem = () => {
           Authorization: 'Bearer ' + auth.token,
         }
       );
-      history.push(`/${sid}`);
+      // console.log(responseData);
+      // localStorage.setItem('storage', JSON.stringify(responseData.storage));
+      globalDispatch({ type: 'set-storage', payload: responseData.storage });
+      history.push(`/${sid}/items`);
     } catch (err) {}
   };
 

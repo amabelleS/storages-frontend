@@ -9,17 +9,25 @@ import {
 
 import MainNavigation from './shared/components/navigation/MainNavigation';
 import { useAuth } from './shared/hooks/auth-hook';
-import Storages from './pages/Storages';
-import Storage from './pages/Storage';
-import NewStorage from './pages/NewStorage';
-import UpdateStorage from './pages/UpdateStorage';
-import StorageItems from './pages/StorageItems';
-import NewItem from './pages/NewItem';
-import UpdateItem from './pages/UpdateItem';
+import {
+  Storages,
+  Storage,
+  NewStorage,
+  UpdateStorage,
+  StorageItems,
+  NewItem,
+  UpdateItem,
+} from './pages';
+// import Storage from './pages/Storage';
+// import NewStorage from './pages/NewStorage';
+// import UpdateStorage from './pages/UpdateStorage';
+// import StorageItems from './pages/StorageItems';
+// import NewItem from './pages/NewItem';
+// import UpdateItem from './pages/UpdateItem';
 import Auth from './user/pages/Auth';
 
-import { StorageState } from './context/storages/StorageState';
 import { AuthContext } from './context/auth/Auth-context';
+import GlobalStateProvider from './context/storages/GlobalStateProvider';
 
 function App() {
   const { token, login, logout, userId } = useAuth();
@@ -75,7 +83,7 @@ function App() {
   }
 
   return (
-    <StorageState>
+    <GlobalStateProvider>
       <AuthContext.Provider
         value={{
           isLoggedIn: !!token,
@@ -90,7 +98,7 @@ function App() {
           <main>{routes}</main>
         </Router>
       </AuthContext.Provider>
-    </StorageState>
+    </GlobalStateProvider>
   );
 }
 

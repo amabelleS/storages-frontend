@@ -1,18 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 
-import StorageContext from '../context/storages/StorageContext';
+import Context from '../context/storages/cotext';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import StorageList from '../components/StorageList';
-
-import Input from '../shared/components/FormElements/Input';
 
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 
 export const Storages = () => {
+  const { globalState, globalDispatch } = useContext(Context);
   const [LoadedStorages, setLoadedStorages] = useState();
   const { sendRequest, isLoading, error, clearError } = useHttpClient();
-  const { setStorages } = useContext(StorageContext);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -51,13 +49,16 @@ export const Storages = () => {
 
         setLoadedStorages(responseData.storages);
         // console.log(responseData.storages);
-        setStorages(responseData.storages);
+        globalDispatch({
+          type: 'set-storages',
+          payload: responseData.storages,
+        });
       } catch (err) {
         console.log(err); // TOFIX!!!!!!!!!!!!
       }
     };
     fetchStorages();
-  }, [sendRequest, setStorages, setLoadedStorages]);
+  }, [sendRequest, setLoadedStorages]);
 
   useEffect(() => {
     if (LoadedStorages) {
@@ -99,9 +100,6 @@ export const Storages = () => {
       {!isLoading && LoadedStorages && (
         <StorageList
           items={searchResults.length > 0 ? searchResults : LoadedStorages}
-          // error={error}
-          // onClear={clearError}
-          // onDeleteStorage={storageDeleteHandler}
         />
       )}
     </React.Fragment>
