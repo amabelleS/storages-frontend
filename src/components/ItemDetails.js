@@ -43,20 +43,9 @@ const ItemDetails = (props) => {
 
   const { sendRequest, isLoading, error, clearError } = useHttpClient();
 
-  // const { storage, itemDeleteHandler, setStorage, getItemsLeft } = useContext(
-  //   StorageContext
-  // );
-
-  // const i = storage.storageItems.find((item) => item.id === props.id);
-
   const [item, setItem] = useState(
     storage.storageItems.find((item) => item.id === props.id)
   );
-  // const [itemsLeft, setItemsLeft] = useState(
-  //   item.qntInStock - item.reservedBy.length
-  // );
-
-  // const { item, setItem } = useState();
 
   const auth = useContext(AuthContext);
 
@@ -65,12 +54,6 @@ const ItemDetails = (props) => {
   useEffect(() => {
     setItem(storage.storageItems.find((item) => item.id === props.id));
   }, [deleteItem, storage, setReseve]);
-
-  // useEffect(() => {
-  //   setItemsLeft(item.qntInStock - item.reservedBy.length);
-
-  //   console.log(itemsLeft);
-  // }, [setItemsLeft, storage, item, setReseve]);
 
   // DELETE
 
@@ -94,7 +77,6 @@ const ItemDetails = (props) => {
           Authorization: 'Bearer ' + auth.token,
         }
       );
-      // itemDeleteHandler(props.storageId, props.item.id);
 
       deleteItem(props.item.id);
       history.push(`/${props.storageId}/items`);
@@ -129,13 +111,7 @@ const ItemDetails = (props) => {
       globalDispatch({ type: 'set-storage', payload: responseData.storage });
       localStorage.setItem('storage', JSON.stringify(responseData.storage));
       setReseve(!reserve);
-      // setItem(storage.storageItems.find((s) => s.id === props.id));
-      // setItemsLeft(
-      //   props.reservedBy && props.reservedBy.length > 0
-      //     ? props.qntInStock - props.reservedBy.length
-      //     : props.qntInStock
-      // );
-      // itemDeleteHandler(props.storageId, props.item.id);
+
       history.push(`/${props.storageId}/items`);
     } catch (err) {}
   };
@@ -218,8 +194,13 @@ const ItemDetails = (props) => {
             <strong>available:</strong> {props.qntInStock - props.reservedStack}
           </p>
         </div>
-        {/* {props.qntInStock && <p>Total {props.qntInStock}</p>} */}
-        <Button onClick={showReserveHandler} className="item-details" reverse>
+
+        <Button
+          onClick={showReserveHandler}
+          className="item-details"
+          disabled={!auth.isLoggedIn}
+          reverse
+        >
           {reserve ? 'RESERVE' : 'UNRESERVE'}
         </Button>
         {auth.userId === props.adminId && (
