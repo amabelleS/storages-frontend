@@ -39,8 +39,6 @@ export const UpdateItem = () => {
     false
   );
 
-  //   console.log(storage);
-  //   const identifiedStorage = storages.find((s) => s.id === storageId);
   const identifiedItem = storage.storageItems.find((i) => i.id === itemId);
 
   useEffect(() => {
@@ -79,8 +77,6 @@ export const UpdateItem = () => {
         }
       );
 
-      console.log(responseData.storage);
-      //   setStorage(responseData.storage);
       globalDispatch({ type: 'set-storage', payload: responseData.storage });
       localStorage.setItem('storage', JSON.stringify(responseData.storage));
       history.push(`/${storageId}/items`);

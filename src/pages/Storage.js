@@ -19,10 +19,11 @@ import './Storage.css';
 export const Storage = (props) => {
   const auth = useContext(AuthContext);
   const { globalState, globalDispatch } = useContext(Context);
+  const { storage } = globalState;
 
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [loadedStorage, setLoadedStorage] = useState();
+  // const [loadedStorage, setLoadedStorage] = useState();
 
   const { sendRequest, isLoading, error, clearError } = useHttpClient();
 
@@ -36,7 +37,7 @@ export const Storage = (props) => {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + `/storages/${sid}`
         );
-        setLoadedStorage(responseData.storage);
+        // setLoadedStorage(responseData.storage);
         globalDispatch({ type: 'set-storage', payload: responseData.storage });
 
         // console.log(responseData.storage);
@@ -45,13 +46,13 @@ export const Storage = (props) => {
 
     fetchedStorage();
     // console.log(globalState.storage);
-  }, [sendRequest, sid, setLoadedStorage]);
+  }, [sendRequest, sid]);
 
   useEffect(() => {
-    if (loadedStorage) {
-      localStorage.setItem('storage', JSON.stringify(loadedStorage));
+    if (storage) {
+      localStorage.setItem('storage', JSON.stringify(storage));
     }
-  }, [loadedStorage]);
+  }, [storage]);
 
   const openMapHandler = () => setShowMap(true);
 
@@ -69,7 +70,7 @@ export const Storage = (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + `/storages/${loadedStorage.id}`,
+        process.env.REACT_APP_BACKEND_URL + `/storages/${storage.id}`,
         'DELETE',
         null,
         {
@@ -88,17 +89,17 @@ export const Storage = (props) => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      {loadedStorage && (
+      {storage && (
         <Modal
           show={showMap}
           onCancel={closeMapHandler}
-          header={loadedStorage.address}
+          header={storage.address}
           contentClass="place-item__modal-content"
           footerClass="place-item__modal-actions"
           footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
         >
           <div className="map-container">
-            <Map center={loadedStorage.location} zoom={16} />
+            <Map center={storage.location} zoom={16} />
           </div>
         </Modal>
       )}
@@ -124,20 +125,20 @@ export const Storage = (props) => {
           can't be undone thereafter.
         </p>
       </Modal>
-      {loadedStorage && (
+      {storage && (
         <article className="place-item">
           <Card className="box place-item__content">
             {isLoading && <LoadingSpinner asOverlay />}
             <div className="place-item__image">
               <img
-                src={`${process.env.REACT_APP_ASSET_URL}/${loadedStorage.image}`}
-                alt={loadedStorage.title}
+                src={`${process.env.REACT_APP_ASSET_URL}/${storage.image}`}
+                alt={storage.title}
               ></img>
             </div>
             <div className="place-item__info">
-              <h2>{loadedStorage.title}</h2>
-              <h3>{loadedStorage.address}</h3>
-              <p>{loadedStorage.description}</p>
+              <h2>{storage.title}</h2>
+              <h3>{storage.address}</h3>
+              <p>{storage.description}</p>
             </div>
             <div className="place-item__actions">
               <Button inverse onClick={openMapHandler}>
@@ -147,12 +148,12 @@ export const Storage = (props) => {
                 STORAGE ITEMS
               </Button>
               <br />
-              {auth.userId === loadedStorage.creator && (
-                <Button enter to={`/${loadedStorage.id}/update`}>
+              {auth.userId === storage.creator && (
+                <Button enter to={`/${storage.id}/update`}>
                   EDIT
                 </Button>
               )}
-              {auth.userId === loadedStorage.creator && (
+              {auth.userId === storage.creator && (
                 <Button onClick={showDeleteWarningHandler}>
                   DELETE STORAGE
                 </Button>
