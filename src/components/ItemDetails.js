@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useReducer } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Modal from '../shared/components/UIElements/Modal';
@@ -10,28 +10,6 @@ import { AuthContext } from '../context/auth/Auth-context';
 import Context from '../context/storages/cotext';
 
 import './ItemDetails.css';
-
-const initialState = {
-  items: [],
-  item: {},
-  storage: {},
-  showConfirmModal: false,
-  showConfirmReserveModal: false,
-  reserve: true,
-  itemsLeftInStock: 0,
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'SET_STORAGE':
-      return { ...state, storage: action.payload };
-
-    case 'SET_ITEMS_LEFT':
-      return { ...state, itemsLeftInStock: action.payload };
-    default:
-      return state;
-  }
-}
 
 const ItemDetails = (props) => {
   const { globalState, globalDispatch, deleteItem } = useContext(Context);
@@ -201,7 +179,13 @@ const ItemDetails = (props) => {
           disabled={!auth.isLoggedIn}
           reverse
         >
-          {reserve ? 'RESERVE' : 'UNRESERVE'}
+          {auth.isLoggedIn
+            ? props.qntInStock - props.reservedStack > 0
+              ? reserve
+                ? 'RESERVE'
+                : 'UNRESERVE'
+              : 'בהשאלה'
+            : 'authenticate to reserve'}
         </Button>
         {auth.userId === props.adminId && (
           <div className="place-item__actions">

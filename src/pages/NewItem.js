@@ -12,6 +12,7 @@ import Button from '../shared/components/FormElements/Button';
 
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
+import ImageUpload from '../shared/components/FormElements/ImageUpload';
 
 import { useForm } from '../shared/hooks/form-hook';
 import { useHttpClient } from '../shared/hooks/http-hook';
@@ -34,11 +35,23 @@ export const NewItem = () => {
         value: '',
         isValid: false,
       },
+      sirialNum: {
+        value: '',
+        isValid: true,
+      },
       rentCost: {
         value: '',
         isValid: false,
       },
+      depositAmount: {
+        value: '',
+        isValid: false,
+      },
       qntInStock: {
+        value: null,
+        isValid: false,
+      },
+      image: {
         value: null,
         isValid: false,
       },
@@ -54,22 +67,29 @@ export const NewItem = () => {
     console.log(formState.inputs);
 
     try {
-      //   const formData = new FormData();
-      //   formData.append('name', formState.inputs.name.value);
-      //   formData.append('description', formState.inputs.description.value);
-      //   formData.append('rentCost', formState.inputs.rentCost.value);
-      //   formData.append('qntInStock', formState.inputs.qntInStock.value);
-      //   // formData.append('creator', auth.userId);
+      const formData = new FormData();
+      formData.append('name', formState.inputs.name.value);
+      formData.append('description', formState.inputs.description.value);
+      formData.append('sirialNum', formState.inputs.sirialNum.value);
+      formData.append('rentCost', formState.inputs.rentCost.value);
+      formData.append('depositAmount', formState.inputs.depositAmount.value);
+      formData.append('qntInStock', formState.inputs.qntInStock.value);
+      formData.append('image', formState.inputs.image.value);
+      // formData.append('creator', auth.userId);
       //   console.log(formData);
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + `/storages/${sid}/items`,
         'POST',
-        JSON.stringify({
-          name: formState.inputs.name.value,
-          description: formState.inputs.description.value,
-          rentCost: formState.inputs.rentCost.value,
-          qntInStock: formState.inputs.qntInStock.value,
-        }),
+        formData,
+        // JSON.stringify({
+        //   name: formState.inputs.name.value,
+        //   description: formState.inputs.description.value,
+        //   sirialNum: formState.inputs.sirialNum.value,
+        //   rentCost: formState.inputs.rentCost.value,
+        //   depositAmount: formState.inputs.depositAmount.value,
+        //   qntInStock: formState.inputs.qntInStock.value,
+
+        // }),
         {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + auth.token,
@@ -105,12 +125,33 @@ export const NewItem = () => {
           onInput={inputHandler}
         />
         <Input
+          id="sirialNum"
+          element="input"
+          type="number"
+          label="Sirial Number"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter a valid number, 0 if no need for internal sirial number."
+          placeholder="Please enter a valid number, 0 if no need for internal sirial number."
+          onInput={inputHandler}
+        />
+        <Input
           id="rentCost"
           element="input"
           type="number"
           label="Rent Cost"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid number."
+          placeholder="Please enter a valid number, 0 if no cost for rent."
+          onInput={inputHandler}
+        />
+        <Input
+          id="depositAmount"
+          element="input"
+          type="number"
+          label="Deposit Amount"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter a valid number, 0 if no deposit in credit card."
+          placeholder="Please enter a valid number, 0 if there is no deposit."
           onInput={inputHandler}
         />
         <Input
@@ -120,9 +161,15 @@ export const NewItem = () => {
           label="Quantety"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid number."
+          placeholder="1 IS RECOMMENDED:)"
           onInput={inputHandler}
         />
-
+        <ImageUpload
+          id="image"
+          center
+          onInput={inputHandler}
+          errorText="Please provide an image"
+        />
         <Button type="submit" disabled={!formState.isValid}>
           ADD ITEM
         </Button>
