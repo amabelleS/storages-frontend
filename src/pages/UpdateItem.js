@@ -19,7 +19,7 @@ import { AuthContext } from '../context/auth/Auth-context';
 import './StorageForm.css';
 
 export const UpdateItem = () => {
-  const { globalState, globalDispatch } = useContext(Context);
+  const { globalState, updateItem } = useContext(Context);
   const { storage } = globalState;
   const [isLoading, setIsLoading] = useState(true);
   const storageId = useParams().sid;
@@ -34,7 +34,7 @@ export const UpdateItem = () => {
       name: { value: '', isValid: false },
       description: { value: '', isValid: false },
       rentCost: { value: '', isValid: false },
-      qntInStock: { value: '', isValid: false },
+      // qntInStock: { value: '', isValid: false },
     },
     false
   );
@@ -48,7 +48,7 @@ export const UpdateItem = () => {
           name: { value: identifiedItem.name, isValid: true },
           description: { value: identifiedItem.description, isValid: true },
           rentCost: { value: identifiedItem.rentCost, isValid: true },
-          qntInStock: { value: identifiedItem.qntInStock, isValid: true },
+          // qntInStock: { value: identifiedItem.qntInStock, isValid: true },
         },
         true
       );
@@ -69,16 +69,17 @@ export const UpdateItem = () => {
           name: formState.inputs.name.value,
           description: formState.inputs.description.value,
           rentCost: formState.inputs.rentCost.value,
-          qntInStock: formState.inputs.qntInStock.value,
+          // qntInStock: formState.inputs.qntInStock.value,
         }),
         {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + auth.token,
         }
       );
-
-      globalDispatch({ type: 'set-storage', payload: responseData.storage });
-      localStorage.setItem('storage', JSON.stringify(responseData.storage));
+      // console.log(responseData);
+      updateItem(itemId, responseData.item);
+      // globalDispatch({ type: 'set-storage', payload: responseData.storage });
+      // localStorage.setItem('storage', JSON.stringify(responseData.storage));
       history.push(`/${storageId}/items`);
     } catch (err) {}
   };
@@ -138,7 +139,7 @@ export const UpdateItem = () => {
             initialValue={identifiedItem.rentCost}
             initialValid={true}
           />
-          <Input
+          {/* <Input
             id="qntInStock"
             element="textarea"
             label="Quantity In Stock"
@@ -148,9 +149,12 @@ export const UpdateItem = () => {
             onInput={inputHandler}
             initialValue={identifiedItem.qntInStock}
             initialValid={true}
-          />
+          /> */}
           <Button type="submit" disabled={!formState.isValid}>
             UPDATE ITEM
+          </Button>
+          <Button inverse to={`/${storage.id}/items`}>
+            BACK TO ITEMSLIST
           </Button>
         </form>
       )}

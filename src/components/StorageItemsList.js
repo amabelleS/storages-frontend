@@ -11,7 +11,10 @@ const StorageItemsList = (props) => {
       <div className="place-list center">
         <Card>
           <h2>No items found</h2>
-          <Button to="/">Back -fix- storage</Button>
+          <Button to={`/${props.storageId}`}>Back to last storage</Button>
+          <Button inverse to="/">
+            Back to all storages
+          </Button>
         </Card>
       </div>
     );
@@ -21,15 +24,15 @@ const StorageItemsList = (props) => {
     <ul className="users-list">
       {props.items.map((item) => (
         <ItemDetails
-          key={item.id}
-          id={item.id}
+          key={item._id}
+          id={item._id}
           //   img={storage.image}
           name={item.name}
           description={item.description}
           rentCost={item.rentCost}
           qntInStock={item.qntInStock}
-          reservedStack={item.reservedStack}
           item={{ ...item }}
+          image={item.image}
           storageId={props.storageId}
           adminId={props.adminId}
 

@@ -7,19 +7,8 @@ const reducer = (state, action) => {
     case 'set-storage':
       localStorage.setItem('storage', JSON.stringify(action.payload));
       return { ...state, storage: action.payload };
-    // case 'delete-item':
-    //   const updatedStorage = {
-    //     ...state.storage,
-    //     storageItems: [
-    //       ...state.storage.storageItems.filter(
-    //         (item) => item.id !== action.payload
-    //       ),
-    //     ],
-    //   };
-    //   return {
-    //     ...state,
-    //     storage: updatedStorage,
-    //   };
+    case 'set-userItems':
+      return { ...state, userItems: action.payload };
 
     default:
       return state;
@@ -29,7 +18,8 @@ const reducer = (state, action) => {
 const useGlobalState = () => {
   const initialSate = {
     storages: [],
-    storage: JSON.parse(localStorage.getItem('storage') || {}),
+    storage: JSON.parse(localStorage.getItem('storage')) || {},
+    userItems: [],
   };
   const [globalState, globalDispatch] = useReducer(reducer, initialSate);
 
@@ -47,7 +37,23 @@ const useGlobalState = () => {
       ...globalState.storage,
       storageItems: [
         ...globalState.storage.storageItems.filter(
-          (item) => item.id !== itemId
+          (item) => item._id !== itemId
+        ),
+      ],
+    };
+    globalDispatch({
+      type: 'set-storage',
+      payload: updatedStorage,
+    });
+  };
+
+  // update item:
+  const updateItem = (itemId, newItem) => {
+    const updatedStorage = {
+      ...globalState.storage,
+      storageItems: [
+        ...globalState.storage.storageItems.map((item) =>
+          item._id === itemId ? newItem : item
         ),
       ],
     };
@@ -80,6 +86,7 @@ const useGlobalState = () => {
     globalState,
     globalDispatch,
     deleteItem,
+    updateItem,
   };
 };
 

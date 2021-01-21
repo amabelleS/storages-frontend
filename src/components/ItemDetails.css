@@ -6,7 +6,7 @@
   padding: 1rem;
   overflow: hidden;
   background: white;
-  width: 100vh;
+  /* max-width: 77%; */
   text-align: center;
 
   display: flex;
@@ -28,6 +28,11 @@
   /* padding: 1rem; */
 }
 
+.item__image {
+  width: 10rem;
+  height: 4rem;
+  margin-right: 1rem;
+}
 /* .item_description {
   max-width: 11rem;
   align-self: center;

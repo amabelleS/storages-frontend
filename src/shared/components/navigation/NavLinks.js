@@ -11,11 +11,13 @@ export const NavLinks = () => {
 
   return (
     <ul className="nav-links">
-      <li>
-        <NavLink to="/" exact>
-          ALL STORAGES
-        </NavLink>
-      </li>
+      {auth.isLoggedIn && auth.name && (
+        <li>
+          <NavLink to={`/userInfo/${auth.userId}`} exact>
+            {auth.name.toUpperCase()}'S ITEMS RESERVED
+          </NavLink>
+        </li>
+      )}
       {auth.isLoggedIn && (
         <li>
           <NavLink to="/storages/new">NEW</NavLink>

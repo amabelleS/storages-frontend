@@ -69,11 +69,16 @@ export const StorageItems = (props) => {
       setfetchedStorage(storage);
       setStorageItems(storage.storageItems);
     }
-    if (storageItems) {
+    if (storageItems && storageItems.length > 0) {
       const results = storageItems.filter((item) => {
         if (
-          item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.description.toLowerCase().includes(searchTerm.toLowerCase())
+          (item &&
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (item &&
+            item.description
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())) ||
+          (item && item.innerNum.toString().includes(searchTerm))
         ) {
           return item;
         }
@@ -86,11 +91,6 @@ export const StorageItems = (props) => {
     setSearchTerm(event.target.value);
   };
 
-  const reserveSubmitHandler = async () => {
-    try {
-    } catch (err) {}
-  };
-
   return (
     <React.Fragment>
       <div className="search-and-add">
@@ -100,7 +100,9 @@ export const StorageItems = (props) => {
         >
           <input
             type="text"
-            placeholder="Search by item name or description"
+            placeholder={`Search by item name or description ${
+              storage.creator === auth.userId && `or sirial number`
+            }`}
             value={searchTerm}
             onChange={handleChange}
           />
@@ -109,6 +111,9 @@ export const StorageItems = (props) => {
           <div className="add-item_button">
             <Button enter to={`/${fetchedStorage.id}/items/new`}>
               ADD ITEM
+            </Button>
+            <Button inverse to={`/${fetchedStorage.id}`}>
+              BACK TO STORAGE
             </Button>
           </div>
         )}

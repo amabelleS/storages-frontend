@@ -35,7 +35,7 @@ export const NewItem = () => {
         value: '',
         isValid: false,
       },
-      sirialNum: {
+      innerNum: {
         value: '',
         isValid: true,
       },
@@ -47,10 +47,10 @@ export const NewItem = () => {
         value: '',
         isValid: false,
       },
-      qntInStock: {
-        value: null,
-        isValid: false,
-      },
+      // qntInStock: {
+      //   value: null,
+      //   isValid: false,
+      // },
       image: {
         value: null,
         isValid: false,
@@ -64,16 +64,16 @@ export const NewItem = () => {
   const itemSubmitHundler = async (event) => {
     event.preventDefault();
     // console.log(sid);
-    console.log(formState.inputs);
+    // console.log(formState.inputs);
 
     try {
       const formData = new FormData();
       formData.append('name', formState.inputs.name.value);
       formData.append('description', formState.inputs.description.value);
-      formData.append('sirialNum', formState.inputs.sirialNum.value);
+      formData.append('innerNum', formState.inputs.innerNum.value);
       formData.append('rentCost', formState.inputs.rentCost.value);
       formData.append('depositAmount', formState.inputs.depositAmount.value);
-      formData.append('qntInStock', formState.inputs.qntInStock.value);
+      // formData.append('qntInStock', formState.inputs.qntInStock.value);
       formData.append('image', formState.inputs.image.value);
       // formData.append('creator', auth.userId);
       //   console.log(formData);
@@ -91,12 +91,11 @@ export const NewItem = () => {
 
         // }),
         {
-          'Content-Type': 'application/json',
           Authorization: 'Bearer ' + auth.token,
         }
       );
-      // console.log(responseData);
       // localStorage.setItem('storage', JSON.stringify(responseData.storage));
+      // console.log(responseData);
       globalDispatch({ type: 'set-storage', payload: responseData.storage });
       history.push(`/${sid}/items`);
     } catch (err) {}
@@ -125,7 +124,7 @@ export const NewItem = () => {
           onInput={inputHandler}
         />
         <Input
-          id="sirialNum"
+          id="innerNum"
           element="input"
           type="number"
           label="Sirial Number"
@@ -154,16 +153,7 @@ export const NewItem = () => {
           placeholder="Please enter a valid number, 0 if there is no deposit."
           onInput={inputHandler}
         />
-        <Input
-          id="qntInStock"
-          element="input"
-          type="number"
-          label="Quantety"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid number."
-          placeholder="1 IS RECOMMENDED:)"
-          onInput={inputHandler}
-        />
+
         <ImageUpload
           id="image"
           center

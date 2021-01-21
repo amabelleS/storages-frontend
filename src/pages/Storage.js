@@ -46,7 +46,7 @@ export const Storage = (props) => {
 
     fetchedStorage();
     // console.log(globalState.storage);
-  }, [sendRequest, sid]);
+  }, [sendRequest, sid, globalDispatch]);
 
   useEffect(() => {
     if (storage) {

@@ -145,6 +145,9 @@ export const UpdateStorage = () => {
           <Button type="submit" disabled={!formState.isValid}>
             UPDATE STORAGE
           </Button>
+          <Button inverse to={`/${storage.id}`}>
+            BACK TO STORAGE
+          </Button>
         </form>
       )}
     </React.Fragment>

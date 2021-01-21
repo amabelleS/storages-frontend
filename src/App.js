@@ -25,12 +25,13 @@ import {
 // import NewItem from './pages/NewItem';
 // import UpdateItem from './pages/UpdateItem';
 import Auth from './user/pages/Auth';
+import UserInfo from './user/pages/UserInfo';
 
 import { AuthContext } from './context/auth/Auth-context';
 import GlobalStateProvider from './context/storages/GlobalStateProvider';
 
 function App() {
-  const { token, login, logout, userId } = useAuth();
+  const { token, login, logout, userId, name } = useAuth();
 
   let routes;
 
@@ -40,7 +41,9 @@ function App() {
         <Route exact path="/">
           <Storages />
         </Route>
-
+        <Route exact path="/userInfo/:uid">
+          <UserInfo />
+        </Route>
         <Route exact path="/storages/new">
           <NewStorage />
         </Route>
@@ -88,6 +91,7 @@ function App() {
         value={{
           isLoggedIn: !!token,
           token: token,
+          name: name,
           login: login,
           logout: logout,
           userId: userId,
