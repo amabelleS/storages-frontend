@@ -6,6 +6,41 @@
   align-items: center;
 }
 
-.add-item_button {
+/* .add-item_button {
   margin: 0 20% 1rem;
+} */
+
+/* .icons-plus-graph-container:hover {
+  border: 1px solid blue;
+  background: rgba(213, 245, 182, 0.4);
+} */
+
+.items-actions {
+  margin: 1rem;
+  border: 1px solid rgb(221, 87, 199);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  padding: 1rem;
+  /* width: 90vw; */
+  background: rgba(240, 228, 237, 0.2);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  /* align-content: center; */
+}
+
+.icons-container:hover {
+  border-bottom: 1px solid blue;
+}
+
+.graph-container {
+  padding: 1rem;
+  /* position: relative; */
+  /* height: 30vh; */
+  /* width: 80vw; */
+}
+
+.graph-container:hover {
+  border-top: 1px solid blue;
 }

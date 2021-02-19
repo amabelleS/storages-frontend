@@ -13,8 +13,8 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 
 const UserInfo = () => {
   const auth = useContext(AuthContext);
-  const { globalState, globalDispatch } = useContext(Context);
-  const { userItems } = globalState;
+  const { globalDispatch } = useContext(Context);
+  // const { userItems } = globalState;
   const [loadedItems, setLoadedItems] = useState();
   const { sendRequest, isLoading, error, clearError } = useHttpClient();
 

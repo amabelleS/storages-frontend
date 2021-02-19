@@ -160,9 +160,14 @@ export const NewItem = () => {
           onInput={inputHandler}
           errorText="Please provide an image"
         />
-        <Button type="submit" disabled={!formState.isValid}>
-          ADD ITEM
-        </Button>
+        <div className="space">
+          <Button type="submit" disabled={!formState.isValid}>
+            ADD ITEM
+          </Button>
+          <Button inverse to={`/${sid}/items`}>
+            BACK TO ITEMSLIST
+          </Button>
+        </div>
       </form>
     </React.Fragment>
   );

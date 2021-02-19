@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+// import { useParams, useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth/Auth-context';
 import Context from '../context/storages/cotext';
@@ -9,8 +9,8 @@ import { useHttpClient } from '../shared/hooks/http-hook';
 import StorageItemsList from '../components/StorageItemsList';
 
 import Button from '../shared/components/FormElements/Button';
-import ErrorModal from '../shared/components/UIElements/ErrorModal';
-import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
+// import ErrorModal from '../shared/components/UIElements/ErrorModal';
+// import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 
 import './StorageItems.css';
 
@@ -25,13 +25,20 @@ export const StorageItems = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  const auth = useContext(AuthContext);
-  const { sendRequest, isLoading, error, clearError } = useHttpClient();
+  const [onlyOutMode, setOnlyOutMode] = useState(false);
+  const [onlyReservedMode, setOnlyReservedMode] = useState(false);
 
-  const history = useHistory();
+  const auth = useContext(AuthContext);
+  const { isLoading } = useHttpClient();
+
+  // const history = useHistory();
 
   // const [reserve, setReserve] = useState(false);
-  const { sid } = useParams();
+  // const { sid } = useParams();
+
+  // const handelOutItems = () => {
+
+  // }
 
   // useEffect(() => {
   //   const fetchedStorage = async () => {
@@ -63,6 +70,15 @@ export const StorageItems = (props) => {
     }
   }, [storage]);
 
+  const onlyOotItems = storage.storageItems.filter((item) => item.out);
+  const onlyResevedItems = storage.storageItems.filter((item) => !item.inStock);
+  // useEffect(() => {
+  //   if (onlyOutMode) {
+  //     storageItems = storage.storageItems.filter((item) => item.out);
+  //   }
+  //   console.log(storageItems);
+  // }, [setOnlyOutMode]);
+
   useEffect(() => {
     if (storage) {
       // console.log(fetchedStorage);
@@ -93,7 +109,9 @@ export const StorageItems = (props) => {
 
   return (
     <React.Fragment>
-      <div className="search-and-add">
+      {/* <ErrorModal error={error} onClear={clearError} /> */}
+
+      <div className="search-and-add ">
         <div
           className="form-control place-form"
           style={{ marginBottom: '2rem' }}
@@ -108,23 +126,49 @@ export const StorageItems = (props) => {
           />
         </div>
         {auth.userId === fetchedStorage.creator && (
-          <div className="add-item_button">
+          <div className="items-actions">
             <Button enter to={`/${fetchedStorage.id}/items/new`}>
               ADD ITEM
             </Button>
             <Button inverse to={`/${fetchedStorage.id}`}>
               BACK TO STORAGE
             </Button>
+            {auth.userId === fetchedStorage.creator && (
+              <Button to={`/${fetchedStorage.id}/statistics`}>
+                Total: {storageItems.length} | show charts
+              </Button>
+            )}
+            {auth.userId === fetchedStorage.creator && (
+              <Button out onClick={() => setOnlyOutMode(!onlyOutMode)}>
+                {onlyOutMode ? 'Show All' : 'Show Out Items'}
+              </Button>
+            )}
+            {auth.userId === fetchedStorage.creator && (
+              <Button
+                stat
+                onClick={() => setOnlyReservedMode(!onlyReservedMode)}
+              >
+                {onlyReservedMode ? 'Show All' : 'Show Reserved Items'}
+              </Button>
+            )}
           </div>
         )}
       </div>
 
       {!isLoading && storageItems && (
         <StorageItemsList
-          items={searchResults.length > 0 ? searchResults : storageItems}
+          items={
+            onlyOutMode
+              ? onlyOotItems
+              : onlyReservedMode
+              ? onlyResevedItems
+              : searchResults.length > 0
+              ? searchResults
+              : storageItems
+          }
           storageId={fetchedStorage._id}
           adminId={fetchedStorage.creator}
-
+          setOnlyOutMode={() => setOnlyOutMode(!onlyOutMode)}
           // reserved={}
         />
       )}

@@ -17,13 +17,10 @@ import {
   StorageItems,
   NewItem,
   UpdateItem,
+  // Statistics,
 } from './pages';
-// import Storage from './pages/Storage';
-// import NewStorage from './pages/NewStorage';
-// import UpdateStorage from './pages/UpdateStorage';
-// import StorageItems from './pages/StorageItems';
-// import NewItem from './pages/NewItem';
-// import UpdateItem from './pages/UpdateItem';
+import Statistics from './pages/Statistics';
+
 import Auth from './user/pages/Auth';
 import UserInfo from './user/pages/UserInfo';
 
@@ -52,6 +49,9 @@ function App() {
         </Route>
         <Route exact path="/:sid/update">
           <UpdateStorage />
+        </Route>
+        <Route exact path="/:sid/statistics">
+          <Statistics />
         </Route>
         <Route exact path="/:sid/items">
           <StorageItems />

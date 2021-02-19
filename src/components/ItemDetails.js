@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Modal from '../shared/components/UIElements/Modal';
+import ErrorModal from '../shared/components/UIElements/ErrorModal';
 
 import Avater from '../shared/components/UIElements/Avatar';
 import Button from '../shared/components/FormElements/Button';
@@ -13,13 +14,13 @@ import Context from '../context/storages/cotext';
 import './ItemDetails.css';
 
 const ItemDetails = (props) => {
-  const { globalState, globalDispatch, deleteItem, updateItem } = useContext(
-    Context
-  );
+  const { globalState, deleteItem, updateItem } = useContext(Context);
   const { storage } = globalState;
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showConfirmReserveModal, setShowConfirmReserveModal] = useState(false);
+  const [showConfirmOutModal, setShowConfirmOutModal] = useState(false);
+  const [showConfirmInModal, setShowConfirmInModal] = useState(false);
   const [reserve, setReseve] = useState(false);
 
   const { sendRequest, isLoading, error, clearError } = useHttpClient();
@@ -34,15 +35,15 @@ const ItemDetails = (props) => {
 
   useEffect(() => {
     setItem(storage.storageItems.find((item) => item._id === props.id));
-  }, [deleteItem, storage, setReseve]);
+  }, [deleteItem, storage, setReseve, updateItem]);
 
   useEffect(() => {
     if (item) {
       setReseve(item.inStock);
     }
   }, [setItem, item, setReseve]);
-  // DELETE
 
+  // DELETE
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
   };
@@ -54,7 +55,7 @@ const ItemDetails = (props) => {
   const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
     try {
-      await sendRequest(
+      const res = await sendRequest(
         process.env.REACT_APP_BACKEND_URL +
           `/storages/${storage.id}/items/${item._id}`,
         'DELETE',
@@ -63,14 +64,13 @@ const ItemDetails = (props) => {
           Authorization: 'Bearer ' + auth.token,
         }
       );
-
-      deleteItem(item._id);
+      console.log(res);
+      deleteItem(item._id, res.storage);
       history.push(`/${props.storageId}/items`);
     } catch (err) {}
   };
 
   // RESERVE
-
   const showReserveHandler = () => {
     setShowConfirmReserveModal(true);
   };
@@ -103,8 +103,95 @@ const ItemDetails = (props) => {
     } catch (err) {}
   };
 
+  // OUT - log item out of storage
+  const showOutHandler = () => {
+    setShowConfirmOutModal(true);
+  };
+
+  const cancelOutHandler = () => {
+    setShowConfirmOutModal(false);
+  };
+
+  const confirmOutHandler = async () => {
+    setShowConfirmOutModal(false);
+    try {
+      const responseData = await sendRequest(
+        process.env.REACT_APP_BACKEND_URL +
+          `/storages/${storage.id}/items/${props.id}/out`,
+        'PATCH',
+        JSON.stringify({ income: item.rentCost }),
+        {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.token,
+        }
+      );
+      console.log(responseData);
+
+      // globalDispatch({ type: 'set-storage', payload: responseData.storage });
+      // localStorage.setItem('storage', JSON.stringify(responseData.storage));
+      updateItem(item._id, responseData.item);
+      // setReseve(responseData.item.inStock);
+
+      history.push(`/${props.storageId}/items`);
+    } catch (err) {}
+  };
+
+  // ITEM IN - log item back into the storage
+
+  const showInHandler = () => {
+    setShowConfirmInModal(true);
+  };
+
+  const cancelInHandler = () => {
+    setShowConfirmInModal(false);
+  };
+
+  const confirmInHandler = async () => {
+    setShowConfirmInModal(false);
+    try {
+      const responseData = await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + `/items/${props.id}/in`,
+        'PATCH',
+        null,
+        {
+          Authorization: 'Bearer ' + auth.token,
+        }
+      );
+      console.log(responseData);
+
+      // globalDispatch({ type: 'set-storage', payload: responseData.storage });
+      // localStorage.setItem('storage', JSON.stringify(responseData.storage));
+      updateItem(item._id, responseData.item);
+      // setReseve(responseData.item.inStock);
+
+      history.push(`/${props.storageId}/items`);
+    } catch (err) {}
+  };
+
+  const outInButton =
+    item && item.out ? (
+      <Button
+        stat
+        big
+        onClick={showInHandler}
+        // disabled={!(auth.userId === props.adminId) || item.inStock}
+      >
+        IN
+      </Button>
+    ) : (
+      <Button
+        out
+        big
+        onClick={showOutHandler}
+        // disabled={!(auth.userId === props.adminId) || item.inStock}
+      >
+        OUT
+      </Button>
+    );
+
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
@@ -148,6 +235,44 @@ const ItemDetails = (props) => {
         </p>
       </Modal>
 
+      <Modal
+        show={showConfirmOutModal}
+        onCancel={cancelOutHandler}
+        header="You are going to chack this item OUT"
+        footerClass="place-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={cancelOutHandler}>
+              CANCEL
+            </Button>
+            <Button danger onClick={confirmOutHandler}>
+              Check item OUT
+            </Button>
+          </React.Fragment>
+        }
+      >
+        <p>Do you want to proceed and OUT this item?</p>
+      </Modal>
+
+      <Modal
+        show={showConfirmInModal}
+        onCancel={cancelInHandler}
+        header="You are going to chack this item OUT"
+        footerClass="place-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={cancelInHandler}>
+              CANCEL
+            </Button>
+            <Button danger onClick={confirmInHandler}>
+              Check item IN
+            </Button>
+          </React.Fragment>
+        }
+      >
+        <p>Do you want to proceed and Log IN this item?</p>
+      </Modal>
+
       <li className="item">
         <div
         // className={`card ${props.className}`}
@@ -188,22 +313,10 @@ const ItemDetails = (props) => {
           <strong>{item.inStock ? 'available' : 'not available'}</strong>
         </p> */}
 
-        <Button
-          onClick={showReserveHandler}
-          className="item-details"
-          disabled={!auth.isLoggedIn || !item.inStock}
-          inverse
-        >
-          {auth.isLoggedIn
-            ? item.inStock
-              ? 'RESERVE'
-              : 'בהשאלה'
-            : 'authenticate to reserve'}
-        </Button>
         {auth.userId === props.adminId && (
-          <div className="place-item__actions">
+          <div className="grouped_actions">
             <Button
-              className="item-details"
+              // className="item-details"
               enter
               to={`/${storage.id}/items/${props.id}/update`}
             >
@@ -211,6 +324,36 @@ const ItemDetails = (props) => {
             </Button>
             <Button onClick={showDeleteWarningHandler}>DELETE</Button>
           </div>
+        )}
+        {item && (
+          <div className="grouped_actions">
+            <Button
+              onClick={showReserveHandler}
+              // className="item-details"
+              disabled={!auth.isLoggedIn || !item.inStock}
+              danger
+            >
+              {auth.isLoggedIn && item
+                ? item.inStock
+                  ? 'RESERVE'
+                  : 'שמור'
+                : 'authenticate to reserve'}
+            </Button>
+            {auth.userId === props.adminId && (
+              <Button
+                onClick={showReserveHandler}
+                // className="item-details"
+                disabled={!(auth.userId === props.adminId) || item.inStock}
+                inverse
+              >
+                UNRESERVE
+              </Button>
+            )}
+          </div>
+        )}
+
+        {auth.userId === props.adminId && (
+          <div className="grouped_actions">{outInButton}</div>
         )}
       </li>
     </React.Fragment>

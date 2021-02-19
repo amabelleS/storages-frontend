@@ -1,5 +1,5 @@
 import React from 'react';
-import './StorageItemsList.css';
+// import './StorageItemsList.css';
 
 import ItemDetails from './ItemDetails';
 import Card from '../shared/components/UIElements/Card';
@@ -11,7 +11,8 @@ const StorageItemsList = (props) => {
       <div className="place-list center">
         <Card>
           <h2>No items found</h2>
-          <Button to={`/${props.storageId}`}>Back to last storage</Button>
+          <Button onClick={props.setOnlyOutMode}>Show All Items</Button>
+          {/* <Button to={`/${props.storageId}`}>Back to last storage</Button> */}
           <Button inverse to="/">
             Back to all storages
           </Button>

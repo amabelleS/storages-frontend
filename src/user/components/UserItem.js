@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Modal from '../../shared/components/UIElements/Modal';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 
 import Avater from '../../shared/components/UIElements/Avatar';
 import Button from '../../shared/components/FormElements/Button';
@@ -11,7 +13,7 @@ import { AuthContext } from '../../context/auth/Auth-context';
 import Context from '../../context/storages/cotext';
 
 const UserItem = (props) => {
-  const { globalState, globalDispatch, updateItem } = useContext(Context);
+  const { globalState, updateItem } = useContext(Context);
   const { userItems } = globalState;
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -74,6 +76,7 @@ const UserItem = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <Modal
         show={showConfirmModal}
         onCancel={cancelReserveHandler}
@@ -138,14 +141,16 @@ const UserItem = (props) => {
           <strong>{item.inStock ? 'available' : 'not available'}</strong>
         </p> */}
 
-        <Button
-          onClick={showReserveHandler}
-          className="item-details"
-          disabled={!auth.isLoggedIn}
-          inverse
-        >
-          {auth.isLoggedIn ? 'RESERVE' : 'authenticate to reserve'}
-        </Button>
+        {item && (
+          <Button
+            onClick={showReserveHandler}
+            className="item-details"
+            disabled={!auth.isLoggedIn || item.out}
+            danger
+          >
+            UNRESERVE
+          </Button>
+        )}
         {auth.userId === props.adminId && (
           <div className="place-item__actions">
             <Button

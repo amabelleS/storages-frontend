@@ -5,3 +5,4 @@ export * from './UpdateStorage';
 export * from './StorageItems';
 export * from './NewItem';
 export * from './UpdateItem';
+export * from './Statistics';

@@ -8,7 +8,7 @@ import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 
 export const Storages = () => {
-  const { globalState, globalDispatch } = useContext(Context);
+  const { globalDispatch } = useContext(Context);
   const [LoadedStorages, setLoadedStorages] = useState();
   const { sendRequest, isLoading, error, clearError } = useHttpClient();
 

@@ -32,7 +32,7 @@ const useGlobalState = () => {
   // };
 
   // delete item:
-  const deleteItem = (itemId) => {
+  const deleteItem = (itemId, storage) => {
     const updatedStorage = {
       ...globalState.storage,
       storageItems: [
@@ -40,6 +40,7 @@ const useGlobalState = () => {
           (item) => item._id !== itemId
         ),
       ],
+      totalItemsInStockCountLog: storage.totalItemsInStockCountLog,
     };
     globalDispatch({
       type: 'set-storage',

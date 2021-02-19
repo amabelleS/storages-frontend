@@ -147,8 +147,8 @@ export const Storage = (props) => {
               <Button danger onClick={openItemList}>
                 STORAGE ITEMS
               </Button>
-              <br />
-              {auth.userId === storage.creator && (
+              {/* <br /> */}
+              {/* {auth.userId === storage.creator && (
                 <Button enter to={`/${storage.id}/update`}>
                   EDIT
                 </Button>
@@ -157,8 +157,27 @@ export const Storage = (props) => {
                 <Button onClick={showDeleteWarningHandler}>
                   DELETE STORAGE
                 </Button>
-              )}
+              )} */}
             </div>
+            {auth.userId === storage.creator && (
+              <div className="place-item__actions">
+                <Button stat to={`/${storage.id}/statistics`}>
+                  SHOW STATISTICS
+                </Button>
+                <Button enter to={`/${storage.id}/update`}>
+                  EDIT
+                </Button>
+                <Button onClick={showDeleteWarningHandler}>
+                  DELETE STORAGE
+                </Button>
+                {/* <Button out to={`/${storage.id}/itemsOut`}>
+                  ITEMS OUT
+                </Button> */}
+                {/* <Button inverse to={`/${storage.id}/itemsCoumt`}>
+                  I
+                </Button> */}
+              </div>
+            )}
           </Card>
         </article>
       )}
