@@ -22,7 +22,7 @@ export const StorageList = (props) => {
         <StorageItem
           key={storage.id}
           id={storage.id}
-          img={storage.image}
+          img={storage.image.url}
           title={storage.title}
           description={storage.description}
           address={storage.address}

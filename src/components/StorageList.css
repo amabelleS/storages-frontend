@@ -17,3 +17,12 @@
   width: 90%;
   max-width: 40rem;
 }
+
+.space-small_screan {
+  margin: 0.5rem;
+}
+@media (min-width: 550px) {
+  .space-small_screan {
+    margin: 0.5rem;
+  }
+}

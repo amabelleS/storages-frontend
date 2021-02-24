@@ -131,7 +131,8 @@ export const Storage = (props) => {
             {isLoading && <LoadingSpinner asOverlay />}
             <div className="place-item__image">
               <img
-                src={`${process.env.REACT_APP_ASSET_URL}/${storage.image}`}
+                src={`${storage.image.url}`}
+                // src={storage.image.url}
                 alt={storage.title}
               ></img>
             </div>
@@ -163,6 +164,9 @@ export const Storage = (props) => {
               <div className="place-item__actions">
                 <Button stat to={`/${storage.id}/statistics`}>
                   SHOW STATISTICS
+                </Button>
+                <Button out to={`/${storage.id}/users`}>
+                  USERS
                 </Button>
                 <Button enter to={`/${storage.id}/update`}>
                   EDIT

@@ -11,7 +11,8 @@ export const Storage = (props) => {
         <Link to={`/${props.id}`}>
           <div className="user-item__image">
             <Avater
-              image={`${process.env.REACT_APP_ASSET_URL}/${props.img}`}
+              image={`${props.img}`}
+              // image={props.img.url}
               alt={props.title}
             />
           </div>

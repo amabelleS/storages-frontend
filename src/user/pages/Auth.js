@@ -66,10 +66,10 @@ export const Auth = () => {
             value: '',
             isValid: false,
           },
-          IDnum: {
-            value: '',
-            isValid: false,
-          },
+          // IDnum: {
+          //   value: '',
+          //   isValid: false,
+          // },
           phoneNum: {
             value: '',
             isValid: false,
@@ -113,7 +113,7 @@ export const Auth = () => {
           'POST',
           JSON.stringify({
             name: formState.inputs.name.value,
-            IDnum: formState.inputs.IDnum.value,
+            // IDnum: formState.inputs.IDnum.value,
             phoneNum: formState.inputs.phoneNum.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
@@ -143,12 +143,12 @@ export const Auth = () => {
                 element="input"
                 id="name"
                 type="text"
-                label="Your Full Name"
+                label="Your Name"
                 validators={[VALIDATOR_REQUIRE()]}
                 errorText="Please enter your full name."
                 onInput={inputHandler}
               />
-              <Input
+              {/* <Input
                 element="input"
                 id="IDnum"
                 type="number"
@@ -156,7 +156,7 @@ export const Auth = () => {
                 validators={[VALIDATOR_REQUIRE()]}
                 errorText="Please enter your ID number."
                 onInput={inputHandler}
-              />
+              /> */}
               <Input
                 element="input"
                 id="phoneNum"

@@ -21,6 +21,7 @@ const ItemDetails = (props) => {
   const [showConfirmReserveModal, setShowConfirmReserveModal] = useState(false);
   const [showConfirmOutModal, setShowConfirmOutModal] = useState(false);
   const [showConfirmInModal, setShowConfirmInModal] = useState(false);
+  const [showUserDetailModal, setShowUserDetailModal] = useState(false);
   const [reserve, setReseve] = useState(false);
 
   const { sendRequest, isLoading, error, clearError } = useHttpClient();
@@ -96,6 +97,7 @@ const ItemDetails = (props) => {
       // console.log(reserve);
       // globalDispatch({ type: 'set-storage', payload: responseData.storage });
       // localStorage.setItem('storage', JSON.stringify(responseData.storage));
+      console.log(responseData.item);
       updateItem(item._id, responseData.item);
       setReseve(responseData.item.inStock);
 
@@ -189,6 +191,21 @@ const ItemDetails = (props) => {
       </Button>
     );
 
+  //
+
+  const showUserDetailHandler = () => {
+    setShowUserDetailModal(true);
+  };
+
+  const cancelUserDetailHandler = () => {
+    setShowUserDetailModal(false);
+  };
+
+  const confirmUserDetailHandler = async () => {
+    setShowUserDetailModal(false);
+    history.push(`/${props.storageId}/items`);
+  };
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -273,89 +290,138 @@ const ItemDetails = (props) => {
         <p>Do you want to proceed and Log IN this item?</p>
       </Modal>
 
-      <li className="item">
-        <div
-        // className={`card ${props.className}`}
-        // style={props.style}
-        // onClick={props.onClick}
+      {item && item.reservedByDetails && (
+        <Modal
+          show={showUserDetailModal}
+          onCancel={cancelUserDetailHandler}
+          header={
+            item &&
+            item.reservedByDetails &&
+            `Name: ` + item.reservedByDetails.name
+          }
+          footerClass="place-item__modal-actions"
+          footer={
+            <React.Fragment>
+              <Button inverse onClick={cancelUserDetailHandler}>
+                CLOSE
+              </Button>
+            </React.Fragment>
+          }
         >
-          {props.children}
-        </div>
-        <div className="item__image">
-          <Avater
-            image={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
-            alt={props.name}
-          />
-        </div>
-        {props.name && <h3 className="item-details">{props.name}</h3>}
-        {props.description && (
-          <p
-            className="item-details"
-            // style={{
-            //   margin: '1.2rem',
-            // }}
+          <address>
+            <a href={'mailto:' + item.reservedByDetails.email}>
+              {item.reservedByDetails.email}
+            </a>
+            {/* {item && item.reservedByDetails && item.reservedByDetails.email} */}
+          </address>
+          <p>
+            Phon Number:{' '}
+            {item && item.reservedByDetails && item.reservedByDetails.phoneNum}
+          </p>
+        </Modal>
+      )}
+
+      {item && (
+        <li className="item">
+          <div
+          // className={`card ${props.className}`}
+          // style={props.style}
+          // onClick={props.onClick}
           >
-            {props.description}
-          </p>
-        )}
-        {props.rentCost && (
+            {props.children}
+          </div>
+          <div className="item__image">
+            <Avater
+              image={`${props.image}`}
+              // image={props.image.url}
+              alt={props.name}
+            />
+          </div>
+          {props.name && (
+            <h3 className="item-details grouped_actions">{props.name}</h3>
+          )}
+          {props.description && (
+            <p
+              className="item-details color big"
+              // style={{
+              //   margin: '1.2rem',
+              // }}
+            >
+              {props.description}
+            </p>
+          )}
+          {props.rentCost && (
+            <p className="item-details">
+              <strong>Rent cost:</strong>{' '}
+              <span className="color">{props.rentCost}</span>
+            </p>
+          )}
+
           <p className="item-details">
-            <strong>Rent cost:</strong> {props.rentCost}
+            <strong>Deposit Amount:</strong>{' '}
+            <span className="color">
+              {item && item.depositAmount && item.depositAmount}
+            </span>
           </p>
-        )}
 
-        <p className="item-details">
-          <strong>Deposit Amount:</strong>{' '}
-          {item && item.depositAmount && item.depositAmount}{' '}
-        </p>
-
-        {/* <p className="item-details">
+          {/* <p className="item-details">
           <strong>{item.inStock ? 'available' : 'not available'}</strong>
         </p> */}
 
-        {auth.userId === props.adminId && (
-          <div className="grouped_actions">
-            <Button
-              // className="item-details"
-              enter
-              to={`/${storage.id}/items/${props.id}/update`}
-            >
-              EDIT
-            </Button>
-            <Button onClick={showDeleteWarningHandler}>DELETE</Button>
-          </div>
-        )}
-        {item && (
-          <div className="grouped_actions">
-            <Button
-              onClick={showReserveHandler}
-              // className="item-details"
-              disabled={!auth.isLoggedIn || !item.inStock}
-              danger
-            >
-              {auth.isLoggedIn && item
-                ? item.inStock
-                  ? 'RESERVE'
-                  : 'שמור'
-                : 'authenticate to reserve'}
-            </Button>
-            {auth.userId === props.adminId && (
+          {auth.userId === props.adminId && (
+            <div className="grouped_actions">
+              <Button
+                // className="item-details"
+                enter
+                to={`/${storage.id}/items/${props.id}/update`}
+              >
+                EDIT
+              </Button>
+              <Button onClick={showDeleteWarningHandler}>DELETE</Button>
+            </div>
+          )}
+          {item && (
+            <div className="grouped_actions">
               <Button
                 onClick={showReserveHandler}
                 // className="item-details"
-                disabled={!(auth.userId === props.adminId) || item.inStock}
-                inverse
+                disabled={!auth.isLoggedIn || !item.inStock}
+                danger
               >
-                UNRESERVE
+                {auth.isLoggedIn && item
+                  ? item.inStock
+                    ? 'RESERVE'
+                    : 'שמור'
+                  : 'authenticate to reserve'}
               </Button>
-            )}
-          </div>
-        )}
+              {auth.userId === props.adminId && (
+                <Button
+                  onClick={showReserveHandler}
+                  // className="item-details"
+                  disabled={!(auth.userId === props.adminId) || item.inStock}
+                  inverse
+                >
+                  UNRESERVE
+                </Button>
+              )}
+            </div>
+          )}
 
-        {auth.userId === props.adminId && (
-          <div className="grouped_actions">{outInButton}</div>
-        )}
-      </li>
+          {auth.userId === props.adminId && (
+            <div className="grouped_actions">{outInButton}</div>
+          )}
+          {item && item.reservedByDetails && auth.userId === props.adminId && (
+            <Button
+              danger
+              onClick={showUserDetailHandler}
+              // className="item-details"
+              disabled={!auth.userId === props.adminId}
+            >
+              User Details
+            </Button>
+          )}
+        </li>
+      )}
     </React.Fragment>
   );
 };

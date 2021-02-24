@@ -11,11 +11,10 @@ const StorageItemsList = (props) => {
       <div className="place-list center">
         <Card>
           <h2>No items found</h2>
-          <Button onClick={props.setOnlyOutMode}>Show All Items</Button>
-          {/* <Button to={`/${props.storageId}`}>Back to last storage</Button> */}
-          <Button inverse to="/">
-            Back to all storages
-          </Button>
+          {/* <Button onClick={props.setOnlyOutMode}>Show All Items</Button> */}
+          <div className="space-small_screan">
+            <Button to={`/${props.storageId}`}>To storage</Button>
+          </div>
         </Card>
       </div>
     );
@@ -33,7 +32,7 @@ const StorageItemsList = (props) => {
           rentCost={item.rentCost}
           qntInStock={item.qntInStock}
           item={{ ...item }}
-          image={item.image}
+          image={item.image.url}
           storageId={props.storageId}
           adminId={props.adminId}
 

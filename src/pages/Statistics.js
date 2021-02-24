@@ -147,30 +147,36 @@ const Statistics = () => {
       </Modal>
 
       <div className="icons-plus-graph-container">
+        <h2>{storage.title.toUpperCase()} CHARTS</h2>
         <div className="icons-container">
-          <h2>{storage.title.toUpperCase()} CHARTS</h2>
           <Button out onClick={() => setMode(!incomeMode)}>
             {incomeMode ? 'SHOW ITEMS COUNT' : 'SHOW INCOME'}
           </Button>
-          {!incomeMode && (
-            <div className="info-icon">
-              <p>
-                Total items :{' '}
-                {storage &&
-                  storage.storageItems.length > 0 &&
-                  storage.storageItems.length}
-              </p>
-            </div>
-          )}
-          {!incomeMode && (
-            <div className="info-icon">
+
+          {/* {!incomeMode && (
+            <div className="button info-icon">
               <p>Out now: {storage && onlyOotItems}</p>
             </div>
-          )}
+          )} */}
           {!incomeMode && (
             <Button stat onClick={showNewItemsNodeHandler}>
               ADD NEW NODE
             </Button>
+          )}
+          {!incomeMode && (
+            <React.Fragment>
+              <div className="button info-icon">
+                <p>
+                  Total items :{' '}
+                  {storage &&
+                    storage.storageItems.length > 0 &&
+                    storage.storageItems.length}
+                </p>
+              </div>
+              <div className="button info-icon">
+                <p>Out now: {storage && onlyOotItems}</p>
+              </div>
+            </React.Fragment>
           )}
         </div>
         <div className="graph-container">{graph}</div>

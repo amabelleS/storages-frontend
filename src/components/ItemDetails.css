@@ -29,19 +29,50 @@
   max-width: 23vw;
   margin: 0 1rem;
   display: inline;
+  color: rgb(39, 22, 56);
   /* white-space: pre-wrap; */
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
   /* white-space: nowrap;
   overflow: hidden; */
   /* text-overflow: ellipsis; */
   /* padding: 1rem; */
 }
 
+.color {
+  color: aquamarine;
+}
+
+.big {
+  width: 12em;
+  height: 6em;
+  border: dotted;
+  /* hyphens: auto; */
+  /* word-wrap: break-word; */
+
+  /* display: flex; */
+  /* overflow-x: scroll; */
+  /* scroll-snap-type: x mandatory; */
+  /* scroll-snap-align: center; */
+  overflow-wrap: break-word;
+  /* word-break: break-all;  */
+  /* white-space: pre-wrap; */
+  /* word-wrazp: break-word; */
+  /* white-space: nowrap; */
+  /* Hide horizontal scrollbar */
+  /* overflow-y: visible; */
+  /* Add vertical scrollbar */
+  /* overflow-x: scroll; */
+  /* overflow: clip; */
+  /* text-overflow: ellipsis; */
+  padding: 1rem;
+}
+
 .item__image {
-  width: 10rem;
-  height: 4rem;
+  width: 18rem;
+  height: 6rem;
   margin-right: 1rem;
-  /* flex-grow: 10; */
+  flex-grow: 2;
+  /* flex-basis: 12rem; */
 }
 /* .item_description {
   max-width: 11rem;
@@ -52,7 +83,7 @@
   padding: 0.1rem;
   text-align: center;
   border: 1px solid rgb(221, 87, 199);
-  margin: 0 0.4rem 0 0;
+  margin: 0.5rem 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
   background: rgba(190, 46, 154, 0.1);

@@ -39,7 +39,7 @@ const BarChart = () => {
 
   // this gives an object with dates as keys - GROUPED BT MONTH ---->
   const groupsByMonth = storage.incomeLog.reduce((groupsByMonth, log) => {
-    const date = log.date.slice(5, 7);
+    const date = log.date.slice(0, 7);
     if (!groupsByMonth[date]) {
       groupsByMonth[date] = [];
     }
@@ -57,15 +57,17 @@ const BarChart = () => {
   });
   // console.log(groupByMonthArrays);
 
-  const sumAmountsByDay = groupArrays.map((date) => {
-    return {
-      date: date.date,
-      amount: date.logs.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.amount,
-        0
-      ),
-    };
-  });
+  const sumAmountsByDay = groupArrays
+    .map((date) => {
+      return {
+        date: date.date,
+        amount: date.logs.reduce(
+          (accumulator, currentValue) => accumulator + currentValue.amount,
+          0
+        ),
+      };
+    })
+    .slice(-30);
 
   const sumAmountsByMonth = groupByMonthArrays.map((date) => {
     return {
@@ -133,7 +135,7 @@ const BarChart = () => {
       >
         <Button stat onClick={() => setMonthMode(!monthMode)}>
           {monthMode
-            ? 'Income Per Month Mode - press to change to dayly presentation'
+            ? 'Income Per Month Mode - press to show income for the last 30 days'
             : 'Income Per Day Mode - press to change to monthly presentation'}
         </Button>
       </div>
