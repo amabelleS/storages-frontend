@@ -26,7 +26,7 @@
 
 .item-details {
   width: 20vw;
-  max-width: 23vw;
+  max-width: 42vw;
   margin: 0 1rem;
   display: inline;
   color: rgb(39, 22, 56);
@@ -42,29 +42,42 @@
   color: aquamarine;
 }
 
-.big {
-  width: 12em;
-  height: 6em;
-  border: dotted;
-  /* hyphens: auto; */
-  /* word-wrap: break-word; */
+.container {
+  overflow: auto;
+}
 
-  /* display: flex; */
-  /* overflow-x: scroll; */
-  /* scroll-snap-type: x mandatory; */
-  /* scroll-snap-align: center; */
-  overflow-wrap: break-word;
-  /* word-break: break-all;  */
-  /* white-space: pre-wrap; */
-  /* word-wrazp: break-word; */
-  /* white-space: nowrap; */
-  /* Hide horizontal scrollbar */
-  /* overflow-y: visible; */
-  /* Add vertical scrollbar */
-  /* overflow-x: scroll; */
-  /* overflow: clip; */
-  /* text-overflow: ellipsis; */
+.wrapper {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.big {
+  width: 33em;
+  height: 6em;
   padding: 1rem;
+}
+
+.big:hover {
+  background: rgba(240, 33, 205, 0.2);
+  /* overflow: visible;
+  white-space: normal;
+  height: auto; just added this line */
+}
+
+::-webkit-scrollbar {
+  width: 0.42rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #8a0f84;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #3c074d;
 }
 
 .item__image {
@@ -110,3 +123,9 @@
       max-width: 23%;
   } */
 }
+
+/* @media (max-width: 420px) {
+  .big {
+    width: 100%;
+  }
+} */

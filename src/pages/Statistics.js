@@ -84,7 +84,7 @@ const Statistics = () => {
     updatedOptions.data[0].dataPoints = formatGraphData1;
     updatedOptions.data[1].dataPoints = formatGraphData2;
     setLineOptions(updatedOptions);
-  }, [setLineOptions]);
+  }, [setLineOptions, showConfirmModal]);
 
   // ADD NEW ITEMS NODE
   const showNewItemsNodeHandler = () => {

@@ -341,14 +341,20 @@ const ItemDetails = (props) => {
             <h3 className="item-details grouped_actions">{props.name}</h3>
           )}
           {props.description && (
-            <p
-              className="item-details color big"
-              // style={{
-              //   margin: '1.2rem',
-              // }}
-            >
-              {props.description}
-            </p>
+            <div className="wrapper item-details color big">
+              <div className="container">
+                <div className="parent">
+                  <p
+                    className="scrollbar"
+                    // style={{
+                    //   margin: '1.2rem',
+                    // }}
+                  >
+                    {props.description}
+                  </p>
+                </div>
+              </div>
+            </div>
           )}
           {props.rentCost && (
             <p className="item-details">
@@ -408,20 +414,32 @@ const ItemDetails = (props) => {
           )}
 
           {auth.userId === props.adminId && (
-            <div className="grouped_actions">{outInButton}</div>
-          )}
-          {item && item.reservedByDetails && auth.userId === props.adminId && (
-            <Button
-              danger
-              onClick={showUserDetailHandler}
-              // className="item-details"
-              disabled={!auth.userId === props.adminId}
-            >
-              User Details
-            </Button>
+            <div className="grouped_actions">
+              {outInButton}
+              {item && item.reservedByDetails && auth.userId === props.adminId && (
+                <Button
+                  danger
+                  onClick={showUserDetailHandler}
+                  // className="item-details"
+                  disabled={!auth.userId === props.adminId}
+                >
+                  User Details
+                </Button>
+              )}
+            </div>
           )}
         </li>
       )}
+      {/* {item && item.reservedByDetails && auth.userId === props.adminId && (
+        <Button
+          danger
+          onClick={showUserDetailHandler}
+          // className="item-details"
+          disabled={!auth.userId === props.adminId}
+        >
+          User Details
+        </Button>
+      )} */}
     </React.Fragment>
   );
 };

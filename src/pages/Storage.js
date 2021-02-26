@@ -131,7 +131,7 @@ export const Storage = (props) => {
             {isLoading && <LoadingSpinner asOverlay />}
             <div className="place-item__image">
               <img
-                src={`${storage.image.url}`}
+                src={storage && storage.image && `${storage.image.url}`}
                 // src={storage.image.url}
                 alt={storage.title}
               ></img>

@@ -103,7 +103,7 @@ export const NewStorage = () => {
           id="image"
           center
           onInput={inputHandler}
-          errorText="Please provide an image"
+          errorText="Please provide an image. Photo horozontaly to avoid spreding:)"
         />
         <Button type="submit" disabled={!formState.isValid}>
           ADD STORAGE

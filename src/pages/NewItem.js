@@ -158,7 +158,7 @@ export const NewItem = () => {
           id="image"
           center
           onInput={inputHandler}
-          errorText="Please provide an image"
+          errorText="Please provide an image. Photo horozontaly to avoid spreading:)"
         />
         <div className="space">
           <Button type="submit" disabled={!formState.isValid}>
