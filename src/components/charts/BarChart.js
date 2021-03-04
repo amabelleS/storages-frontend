@@ -8,14 +8,14 @@ import Button from '../../shared/components/FormElements/Button';
 
 import Context from '../../context/storages/cotext';
 
+import './charts.css';
+
 const BarChart = () => {
   const [options, setOptions] = useState(barOptions);
-  const { globalState, globalDispatch } = useContext(Context);
+  const { globalState } = useContext(Context);
   const { storage } = globalState;
 
   const [monthMode, setMonthMode] = useState(false);
-
-  // const groupIncomeByDay = storage.incomeLog.map(log => )
 
   // this gives an object with dates as keys
   const groups = storage.incomeLog.reduce((groups, log) => {
@@ -35,7 +35,6 @@ const BarChart = () => {
       logs: groups[date],
     };
   });
-  // console.log(groupArrays);
 
   // this gives an object with dates as keys - GROUPED BT MONTH ---->
   const groupsByMonth = storage.incomeLog.reduce((groupsByMonth, log) => {
@@ -43,8 +42,8 @@ const BarChart = () => {
     if (!groupsByMonth[date]) {
       groupsByMonth[date] = [];
     }
+
     groupsByMonth[date].push(log);
-    // console.log(groupsByMonth);
     return groupsByMonth;
   }, {});
 
@@ -55,7 +54,6 @@ const BarChart = () => {
       logs: groupsByMonth[date],
     };
   });
-  // console.log(groupByMonthArrays);
 
   const sumAmountsByDay = groupArrays
     .map((date) => {
@@ -78,11 +76,6 @@ const BarChart = () => {
       ),
     };
   });
-  // console.log(sumAmountsByMonth);
-
-  // let sum = groups.reduce(function (accumulator, currentValue) {
-  //   return accumulator + currentValue;
-  // }, 0);
 
   const formatGraphData = sumAmountsByDay.map((log) => {
     let dataPoint = {
@@ -90,7 +83,6 @@ const BarChart = () => {
       // x: index * 10,
       y: log.amount,
       label: log.date.slice(0, 10),
-      // label: log.date,
     };
 
     return dataPoint;
@@ -102,14 +94,12 @@ const BarChart = () => {
       // x: index * 10,
       y: log.amount,
       label: log.date,
-      // label: log.date,
     };
 
     return dataPoint;
   });
 
   useEffect(() => {
-    // let x = 0;
     if (!monthMode) {
       const updatedOptions = { ...options };
       updatedOptions.data[0].dataPoints = formatGraphData;
@@ -121,7 +111,8 @@ const BarChart = () => {
 
       setOptions(updatedOptions);
     }
-  }, [setOptions, monthMode]);
+    // eslint-disable-next-line
+  }, [setOptions, monthMode, storage]);
 
   const containerProps = {
     height: '42vh',
@@ -129,10 +120,7 @@ const BarChart = () => {
 
   return (
     <div>
-      <div
-        className="grouped_actions"
-        style={{ margin: '1rem', fontWeight: 'bold', fontSize: '1.1rem' }}
-      >
+      <div className="chart_action">
         <Button stat onClick={() => setMonthMode(!monthMode)}>
           {monthMode
             ? 'Income Per Month Mode - press to show income for the last 30 days'

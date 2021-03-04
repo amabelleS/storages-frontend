@@ -64,20 +64,5 @@ export default {
         // { x: new Date(2017, 6, 30), y: 25 },
       ],
     },
-    // {
-    //   name: 'Nantucket',
-    //   type: 'spline',
-    //   yValueFormatString: '#0.## °C',
-    //   showInLegend: true,
-    //   dataPoints: [
-    //     { x: new Date(2017, 6, 24), y: 22 },
-    //     { x: new Date(2017, 6, 25), y: 19 },
-    //     { x: new Date(2017, 6, 26), y: 23 },
-    //     { x: new Date(2017, 6, 27), y: 24 },
-    //     { x: new Date(2017, 6, 28), y: 24 },
-    //     { x: new Date(2017, 6, 29), y: 23 },
-    //     { x: new Date(2017, 6, 30), y: 23 },
-    //   ],
-    // },
   ],
 };

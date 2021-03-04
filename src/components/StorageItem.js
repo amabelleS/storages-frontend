@@ -6,17 +6,18 @@ import './StorageItem.css';
 
 export const Storage = (props) => {
   return (
-    <li className="user-item">
-      <Card className="user-item__content">
+    <li className="storage-item">
+      <Card className="storage-item__content">
         <Link to={`/${props.id}`}>
-          <div className="user-item__image">
-            <Avater
-              image={`${props.img}`}
-              // image={props.img.url}
-              alt={props.title}
-            />
-          </div>
-          <div className="user-item__info">
+          <div className="info-items">
+            <div className="storage-item__image">
+              <Avater image={`${props.img}`} alt={props.title} />
+            </div>
+            <div className="scroll-container">
+              {' '}
+              <h4 className="scrollbar desc">{props.description}</h4>
+            </div>
+
             <h2>{props.title}</h2>
             <h3>{props.address}</h3>
           </div>

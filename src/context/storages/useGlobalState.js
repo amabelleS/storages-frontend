@@ -3,6 +3,7 @@ import { useReducer } from 'react';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'set-storages':
+      localStorage.setItem('storages', JSON.stringify(action.payload));
       return { ...state, storages: action.payload };
     case 'set-storage':
       localStorage.setItem('storage', JSON.stringify(action.payload));
@@ -23,11 +24,12 @@ const useGlobalState = () => {
   };
   const [globalState, globalDispatch] = useReducer(reducer, initialSate);
 
-  // add item:
-  // const addItem = (item) => {
+  // update storage:
+  // const updateSorage = (updatedStorage) => {
+  //   console.log(updatedStorage);
   //   globalDispatch({
-  //     type: 'add-item',
-  //     payload: item,
+  //     type: 'set-storage',
+  //     payload: updatedStorage,
   //   });
   // };
 
@@ -63,25 +65,6 @@ const useGlobalState = () => {
       payload: updatedStorage,
     });
   };
-
-  // const storageDeleteHandler = (deletedStorageId) => {
-  //   setStorages((prevStorages) =>
-  //     prevStorages.filter((storage) => storage.id !== deletedStorageId)
-  //   );
-  // };
-  // const setAmount = (itemId) => {
-
-  //  const updatedStorage = {
-  //    ...globalState.storage,
-  //    storageItems: [
-  //      ...globalState.storage.storageItems.find((item) => item.id === itemId),
-  //    ],
-  //  };
-  //  globalDispatch({
-  //    type: 'set-storage',
-  //    payload: updatedStorage,
-  //  });
-  // };
 
   return {
     globalState,

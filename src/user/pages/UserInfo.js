@@ -14,16 +14,9 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 const UserInfo = () => {
   const auth = useContext(AuthContext);
   const { globalDispatch } = useContext(Context);
-  // const { userItems } = globalState;
-  const [loadedItems, setLoadedItems] = useState();
+  const [loadedItems, setLoadedItems] = useState([]);
+
   const { sendRequest, isLoading, error, clearError } = useHttpClient();
-
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
 
   useEffect(() => {
     const fetchUserItems = async () => {
@@ -33,7 +26,6 @@ const UserInfo = () => {
         );
 
         setLoadedItems(responseData.items);
-        // console.log(responseData.items);
         globalDispatch({
           type: 'set-userItems',
           payload: responseData.items,
@@ -43,26 +35,9 @@ const UserInfo = () => {
       }
     };
     fetchUserItems();
-  }, [sendRequest, setLoadedItems]);
 
-  //   useEffect(() => {
-  //     if (loadedItems && loadedItems.length > 0) {
-  //       localStorage.setItem('userItems', JSON.stringify(loadedItems));
-
-  //       const results = loadedItems.filter((item) => {
-  //         if (
-  //           (item &&
-  //             item.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-  //           (item &&
-  //             item.descripsion.toLowerCase().includes(searchTerm.toLowerCase()))
-  //         ) {
-  //           return item;
-  //         }
-  //       });
-
-  //       setSearchResults(results);
-  //     }
-  //   }, [searchTerm, loadedItems]);
+    // eslint-disable-next-line
+  }, [sendRequest, setLoadedItems, auth.userId]);
 
   return (
     <React.Fragment>
@@ -72,30 +47,18 @@ const UserInfo = () => {
           {isLoading && <LoadingSpinner asOverlay />}
         </div>
       )}
-      <div className="form-control place-form" style={{ marginBottom: '2rem' }}>
-        <input
-          type="text"
-          placeholder="Search by name or discription"
-          value={searchTerm}
-          onChange={handleChange}
-        />
-      </div>
-      {!loadedItems && (
+
+      {!isLoading && !loadedItems && (
         <div className="user-list center">
           <Card>
             <h2>No items found</h2>
-            {/* <Button to={`/${props.storageId}`}>Back to last storage</Button> */}
             <Button inverse to="/">
               Back to all storages
             </Button>
           </Card>
         </div>
       )}
-      {!isLoading && loadedItems && (
-        <UserItemsList
-          items={searchResults.length > 0 ? searchResults : loadedItems}
-        />
-      )}
+      {!isLoading && loadedItems && <UserItemsList items={loadedItems} />}
     </React.Fragment>
   );
 };

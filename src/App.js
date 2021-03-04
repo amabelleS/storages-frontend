@@ -20,7 +20,6 @@ import {
   // Statistics,
 } from './pages';
 import Statistics from './pages/Statistics';
-import StorageUsers from './pages/admin/StorageUsers';
 
 import Auth from './user/pages/Auth';
 import UserInfo from './user/pages/UserInfo';
@@ -54,9 +53,6 @@ function App() {
         <Route exact path="/:sid/statistics">
           <Statistics />
         </Route>
-        <Route exact path="/:sid/users">
-          <StorageUsers />
-        </Route>
         <Route exact path="/:sid/items">
           <StorageItems />
         </Route>
@@ -66,7 +62,7 @@ function App() {
         <Route exact path="/:sid/items/:itemId/update">
           <UpdateItem />
         </Route>
-        {/* <Redirect to="/" /> */}
+        <Redirect to="/" />
       </Switch>
     );
   } else {

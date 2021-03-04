@@ -72,7 +72,7 @@ export const NewStorage = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <form className="place-form" onSubmit={storageSubmitHundler}>
+      <form className="storage-form" onSubmit={storageSubmitHundler}>
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
           id="title"
@@ -105,9 +105,14 @@ export const NewStorage = () => {
           onInput={inputHandler}
           errorText="Please provide an image. Photo horozontaly to avoid spreding:)"
         />
-        <Button type="submit" disabled={!formState.isValid}>
-          ADD STORAGE
-        </Button>
+        <div className="space">
+          <Button enter type="submit" disabled={!formState.isValid}>
+            ADD STORAGE
+          </Button>
+          <Button inverse to="/">
+            BACK TO STORAGES
+          </Button>
+        </div>
       </form>
     </React.Fragment>
   );

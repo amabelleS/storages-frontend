@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-// import { useParams, useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth/Auth-context';
 import Context from '../context/storages/cotext';
@@ -9,8 +8,6 @@ import { useHttpClient } from '../shared/hooks/http-hook';
 import StorageItemsList from '../components/StorageItemsList';
 
 import Button from '../shared/components/FormElements/Button';
-// import ErrorModal from '../shared/components/UIElements/ErrorModal';
-// import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 
 import './StorageItems.css';
 
@@ -31,57 +28,25 @@ export const StorageItems = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading } = useHttpClient();
 
-  // const history = useHistory();
-
-  // const [reserve, setReserve] = useState(false);
-  // const { sid } = useParams();
-
-  // const handelOutItems = () => {
-
-  // }
-
-  // useEffect(() => {
-  //   const fetchedStorage = async () => {
-  //     try {
-  //       const responseData = await sendRequest(
-  //         process.env.REACT_APP_BACKEND_URL + `/storages/${sid}`
-  //       );
-  //       setfetchedStorage(responseData.storage);
-  //       setStorageItems(responseData.storage.storageItems);
-  //       // console.log(responseData.storage);
-  //     } catch (err) {}
-  //   };
-
-  //   fetchedStorage();
-  // }, [sendRequest, sid, setfetchedStorage, setStorageItems]);
-
   useEffect(() => {
-    // getStorageFromLocalStorage();
     if (storage) {
       setfetchedStorage(storage);
       setStorageItems(storage.storageItems);
     } else {
       const data = localStorage.getItem('storage');
       if (data) {
-        // console.log(data);
         globalDispatch({ type: 'set-storage', payload: JSON.parse(data) });
         setfetchedStorage(JSON.parse(data));
       }
     }
+    // eslint-disable-next-line
   }, [storage]);
 
-  const onlyOotItems = storage.storageItems.filter((item) => item.out);
+  const onlyOutItems = storage.storageItems.filter((item) => item.out);
   const onlyResevedItems = storage.storageItems.filter((item) => !item.inStock);
-  // useEffect(() => {
-  //   if (onlyOutMode) {
-  //     storageItems = storage.storageItems.filter((item) => item.out);
-  //   }
-  //   console.log(storageItems);
-  // }, [setOnlyOutMode]);
 
   useEffect(() => {
     if (storage) {
-      // console.log(fetchedStorage);
       setfetchedStorage(storage);
       setStorageItems(storage.storageItems);
     }
@@ -98,10 +63,11 @@ export const StorageItems = (props) => {
         ) {
           return item;
         }
+        return null;
       });
       setSearchResults(results);
     }
-  }, [fetchedStorage, searchTerm]);
+  }, [fetchedStorage, searchTerm, storage, storageItems]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -113,7 +79,7 @@ export const StorageItems = (props) => {
 
       <div className="search-and-add ">
         <div
-          className="form-control place-form"
+          className="form-control storage-form"
           style={{ marginBottom: '2rem' }}
         >
           <input
@@ -159,7 +125,7 @@ export const StorageItems = (props) => {
         <StorageItemsList
           items={
             onlyOutMode
-              ? onlyOotItems
+              ? onlyOutItems
               : onlyReservedMode
               ? onlyResevedItems
               : searchResults.length > 0
@@ -169,7 +135,6 @@ export const StorageItems = (props) => {
           storageId={fetchedStorage._id}
           adminId={fetchedStorage.creator}
           setOnlyOutMode={() => setOnlyOutMode(!onlyOutMode)}
-          // reserved={}
         />
       )}
     </React.Fragment>

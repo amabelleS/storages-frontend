@@ -16,3 +16,15 @@
   width: 90%;
   max-width: 40rem;
 }
+
+@media (max-width: 1331px) {
+  .user-fix {
+    margin-right: 11rem;
+  }
+}
+
+@media (max-width: 1111px) {
+  .user-fix {
+    margin-right: 2rem;
+  }
+}

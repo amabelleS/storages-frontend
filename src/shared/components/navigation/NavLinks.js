@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 import { AuthContext } from '../../../context/auth/Auth-context';
 
-// import { AuthContext } from '../../context/auth-context';
 import './NavLinks.css';
 
 export const NavLinks = () => {
@@ -12,21 +11,20 @@ export const NavLinks = () => {
   return (
     <ul className="nav-links">
       {auth.isLoggedIn && auth.name && (
-        <li>
+        <li className="nav_actions">
           <NavLink to={`/userInfo/${auth.userId}`} exact>
             {auth.name.toUpperCase()}'S ITEMS RESERVED
           </NavLink>
         </li>
       )}
       {auth.isLoggedIn && (
-        <li>
+        <li className="nav_actions">
           <NavLink to="/storages/new">NEW</NavLink>
         </li>
       )}
-      <li>{/* <NavLink to={`/:${sid}/update`}>Update</NavLink> */}</li>
-      {/* <NavLink to="/">MY STORAGE</NavLink> */}
+
       {!auth.isLoggedIn && (
-        <li>
+        <li className="nav_actions">
           <NavLink to="/auth">
             <i className="fas fa-key"></i> AUTHENTICATE
           </NavLink>

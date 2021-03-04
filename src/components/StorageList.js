@@ -7,7 +7,7 @@ import Button from '../shared/components/FormElements/Button';
 export const StorageList = (props) => {
   if (props.items.length === 0) {
     return (
-      <div className="place-list center">
+      <div className="storage-list center">
         <Card>
           <h2>No storages found</h2>
           <Button to="/storages/new">Add new storage</Button>
@@ -17,7 +17,7 @@ export const StorageList = (props) => {
   }
 
   return (
-    <ul className="users-list">
+    <ul className="storages-list">
       {props.items.map((storage) => (
         <StorageItem
           key={storage.id}

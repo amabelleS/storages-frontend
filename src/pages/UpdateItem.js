@@ -34,7 +34,6 @@ export const UpdateItem = () => {
       name: { value: '', isValid: false },
       description: { value: '', isValid: false },
       rentCost: { value: '', isValid: false },
-      // qntInStock: { value: '', isValid: false },
     },
     false
   );
@@ -48,7 +47,6 @@ export const UpdateItem = () => {
           name: { value: identifiedItem.name, isValid: true },
           description: { value: identifiedItem.description, isValid: true },
           rentCost: { value: identifiedItem.rentCost, isValid: true },
-          // qntInStock: { value: identifiedItem.qntInStock, isValid: true },
         },
         true
       );
@@ -59,7 +57,6 @@ export const UpdateItem = () => {
 
   const updateSubmitHandler = async (event) => {
     event.preventDefault();
-    // console.log(formState.inputs);
 
     try {
       const responseData = await sendRequest(
@@ -69,17 +66,15 @@ export const UpdateItem = () => {
           name: formState.inputs.name.value,
           description: formState.inputs.description.value,
           rentCost: formState.inputs.rentCost.value,
-          // qntInStock: formState.inputs.qntInStock.value,
         }),
         {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + auth.token,
         }
       );
-      // console.log(responseData);
+
       updateItem(itemId, responseData.item);
-      // globalDispatch({ type: 'set-storage', payload: responseData.storage });
-      // localStorage.setItem('storage', JSON.stringify(responseData.storage));
+
       history.push(`/${storageId}/items`);
     } catch (err) {}
   };
@@ -106,7 +101,7 @@ export const UpdateItem = () => {
     <React.Fragment>
       <ErrorModal error={error} onclear={clearError} />
       {!isLoading && identifiedItem && (
-        <form className="place-form" onSubmit={updateSubmitHandler}>
+        <form className="storage-form" onSubmit={updateSubmitHandler}>
           <Input
             id="name"
             element="input"
@@ -139,17 +134,6 @@ export const UpdateItem = () => {
             initialValue={identifiedItem.rentCost}
             initialValid={true}
           />
-          {/* <Input
-            id="qntInStock"
-            element="textarea"
-            label="Quantity In Stock"
-            validators={[VALIDATOR_REQUIRE()]}
-            type="number"
-            errorText="Please enter a valid number."
-            onInput={inputHandler}
-            initialValue={identifiedItem.qntInStock}
-            initialValid={true}
-          /> */}
           <Button type="submit" disabled={!formState.isValid}>
             UPDATE ITEM
           </Button>

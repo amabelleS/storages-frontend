@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 
 import Modal from '../../shared/components/UIElements/Modal';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 
 import Avater from '../../shared/components/UIElements/Avatar';
 import Button from '../../shared/components/FormElements/Button';
@@ -20,19 +19,19 @@ const UserItem = (props) => {
 
   const [reserve, setReseve] = useState(userItems.inStock);
 
-  const { sendRequest, isLoading, error, clearError } = useHttpClient();
+  const { sendRequest, error, clearError } = useHttpClient();
 
   const [item, setItem] = useState(
     userItems.find((item) => item._id === props.id)
   );
-  // console.log(item._id);
+
   const auth = useContext(AuthContext);
 
   const history = useHistory();
 
   useEffect(() => {
     setItem(userItems.find((item) => item._id === props.id));
-  }, [setItem, userItems]);
+  }, [setItem, userItems, props.id]);
 
   useEffect(() => {
     if (item) {
@@ -40,8 +39,7 @@ const UserItem = (props) => {
     }
   }, [setItem, item, setReseve]);
 
-  // RESERVE
-
+  // UNRESERVE
   const showReserveHandler = () => {
     setShowConfirmModal(true);
   };
@@ -63,14 +61,11 @@ const UserItem = (props) => {
           Authorization: 'Bearer ' + auth.token,
         }
       );
-      // console.log(responseData.item);
-      // console.log(reserve);
-      // globalDispatch({ type: 'set-storage', payload: responseData.storage });
-      // localStorage.setItem('storage', JSON.stringify(responseData.storage));
+
       updateItem(item._id, responseData.item);
       setReseve(responseData.item.inStock);
 
-      history.push(`/${props.storageId}/items`);
+      history.push(`/${item.storage}/items`);
     } catch (err) {}
   };
 
@@ -81,7 +76,7 @@ const UserItem = (props) => {
         show={showConfirmModal}
         onCancel={cancelReserveHandler}
         header="need change?"
-        footerClass="place-item__modal-actions"
+        footerClass="storage-item__modal-actions"
         footer={
           <React.Fragment>
             <Button inverse onClick={cancelReserveHandler}>
@@ -100,46 +95,39 @@ const UserItem = (props) => {
       </Modal>
 
       <li className="item">
-        <div
-        // className={`card ${props.className}`}
-        // style={props.style}
-        // onClick={props.onClick}
-        >
-          {props.children}
-        </div>
         {item && item.image && (
           <div className="item__image">
-            <Avater
-              image={`${process.env.REACT_APP_ASSET_URL}/${item.image}`}
-              alt={item.name}
-            />
+            <Avater image={`${item.image.url}`} alt={item.name} />
           </div>
         )}
-        {item && item.name && <h3 className="item-details">{item.name}</h3>}
+        {item && item.name && (
+          <h3 className="item-details grouped_actions">{item.name}</h3>
+        )}
         {item && item.description && (
-          <p
-            className="item-details"
-            // style={{
-            //   margin: '1.2rem',
-            // }}
-          >
-            {item.description}
-          </p>
-        )}
-        {item && item.rentCost && (
-          <p className="item-details">
-            <strong>Rent cost:</strong> {item.rentCost}
-          </p>
+          <div className="wrapper item-details big">
+            <div className="container">
+              <div className="parent">
+                <p className="scrollbar">{item.description}</p>
+              </div>
+            </div>
+          </div>
         )}
 
-        <p className="item-details">
-          <strong>Deposit Amount:</strong>{' '}
-          {item && item.depositAmount && item.depositAmount}{' '}
-        </p>
+        <div className="cost user-fix">
+          {item && item.rentCost && (
+            <p className="item-details cost rent">
+              <strong>Rent cost:</strong>{' '}
+              <span className="color">{item.rentCost}</span>
+            </p>
+          )}
 
-        {/* <p className="item-details">
-          <strong>{item.inStock ? 'available' : 'not available'}</strong>
-        </p> */}
+          <p className="item-details cost deposit">
+            <strong>Deposit Amount:</strong>{' '}
+            <span className="color">
+              {item && item.depositAmount && item.depositAmount}
+            </span>
+          </p>
+        </div>
 
         {item && (
           <Button
@@ -152,7 +140,7 @@ const UserItem = (props) => {
           </Button>
         )}
         {auth.userId === props.adminId && (
-          <div className="place-item__actions">
+          <div className="storage-item__actions">
             <Button
               className="item-details"
               enter

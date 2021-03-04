@@ -47,10 +47,6 @@ export const NewItem = () => {
         value: '',
         isValid: false,
       },
-      // qntInStock: {
-      //   value: null,
-      //   isValid: false,
-      // },
       image: {
         value: null,
         isValid: false,
@@ -63,8 +59,6 @@ export const NewItem = () => {
 
   const itemSubmitHundler = async (event) => {
     event.preventDefault();
-    // console.log(sid);
-    // console.log(formState.inputs);
 
     try {
       const formData = new FormData();
@@ -73,29 +67,16 @@ export const NewItem = () => {
       formData.append('innerNum', formState.inputs.innerNum.value);
       formData.append('rentCost', formState.inputs.rentCost.value);
       formData.append('depositAmount', formState.inputs.depositAmount.value);
-      // formData.append('qntInStock', formState.inputs.qntInStock.value);
       formData.append('image', formState.inputs.image.value);
-      // formData.append('creator', auth.userId);
-      //   console.log(formData);
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + `/storages/${sid}/items`,
         'POST',
         formData,
-        // JSON.stringify({
-        //   name: formState.inputs.name.value,
-        //   description: formState.inputs.description.value,
-        //   sirialNum: formState.inputs.sirialNum.value,
-        //   rentCost: formState.inputs.rentCost.value,
-        //   depositAmount: formState.inputs.depositAmount.value,
-        //   qntInStock: formState.inputs.qntInStock.value,
-
-        // }),
         {
           Authorization: 'Bearer ' + auth.token,
         }
       );
-      // localStorage.setItem('storage', JSON.stringify(responseData.storage));
-      // console.log(responseData);
+
       globalDispatch({ type: 'set-storage', payload: responseData.storage });
       history.push(`/${sid}/items`);
     } catch (err) {}
@@ -104,7 +85,7 @@ export const NewItem = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <form className="place-form" onSubmit={itemSubmitHundler}>
+      <form className="storage-form" onSubmit={itemSubmitHundler}>
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
           id="name"
@@ -161,7 +142,7 @@ export const NewItem = () => {
           errorText="Please provide an image. Photo horozontaly to avoid spreading:)"
         />
         <div className="space">
-          <Button type="submit" disabled={!formState.isValid}>
+          <Button enter type="submit" disabled={!formState.isValid}>
             ADD ITEM
           </Button>
           <Button inverse to={`/${sid}/items`}>

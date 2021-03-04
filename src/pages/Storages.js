@@ -48,7 +48,7 @@ export const Storages = () => {
         );
 
         setLoadedStorages(responseData.storages);
-        // console.log(responseData.storages);
+
         globalDispatch({
           type: 'set-storages',
           payload: responseData.storages,
@@ -58,28 +58,26 @@ export const Storages = () => {
       }
     };
     fetchStorages();
+
+    // eslint-disable-next-line
   }, [sendRequest, setLoadedStorages]);
 
   useEffect(() => {
     if (LoadedStorages) {
-      localStorage.setItem('storages', JSON.stringify(LoadedStorages));
-
       const results = LoadedStorages.filter((storage) => {
         if (
           storage.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          storage.address.toLowerCase().includes(searchTerm.toLowerCase())
+          storage.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          storage.description.toLowerCase().includes(searchTerm.toLowerCase())
         ) {
           return storage;
         }
+        return null;
       });
 
       setSearchResults(results);
     }
   }, [searchTerm, LoadedStorages]);
-
-  // const storageDeleteHandler = () => {};
-
-  // const inputHandler = () => {};
 
   return (
     <React.Fragment>
@@ -89,10 +87,14 @@ export const Storages = () => {
           {isLoading && <LoadingSpinner asOverlay />}
         </div>
       )}
-      <div className="form-control place-form" style={{ marginBottom: '2rem' }}>
+      <div
+        className="form-control storage-form search"
+        style={{ marginBottom: '2rem' }}
+      >
         <input
+          className="search"
           type="text"
-          placeholder="Search by title or address"
+          placeholder="Search by title or address, or description"
           value={searchTerm}
           onChange={handleChange}
         />

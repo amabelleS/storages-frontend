@@ -1,5 +1,4 @@
 import React from 'react';
-// import './StorageItemsList.css';
 
 import ItemDetails from './ItemDetails';
 import Card from '../shared/components/UIElements/Card';
@@ -8,10 +7,9 @@ import Button from '../shared/components/FormElements/Button';
 const StorageItemsList = (props) => {
   if (props.items.length === 0) {
     return (
-      <div className="place-list center">
+      <div className="storage-list center">
         <Card>
           <h2>No items found</h2>
-          {/* <Button onClick={props.setOnlyOutMode}>Show All Items</Button> */}
           <div className="space-small_screan">
             <Button to={`/${props.storageId}`}>To storage</Button>
           </div>
@@ -21,7 +19,7 @@ const StorageItemsList = (props) => {
   }
 
   return (
-    <ul className="users-list">
+    <ul className="items-list">
       {props.items.map((item) => (
         <ItemDetails
           key={item._id}
@@ -35,9 +33,6 @@ const StorageItemsList = (props) => {
           image={item.image.url}
           storageId={props.storageId}
           adminId={props.adminId}
-
-          //   reserved={props.reserved}
-          //   creator={storage.creator}
         />
       ))}
     </ul>
