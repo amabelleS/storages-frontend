@@ -28,11 +28,11 @@
 }
 
 .main-navigation__title a:hover {
-  background: #01ffff;
+  background: rgb(1, 255, 255);
   color: #9d72ff;
-  border: 1.5px solid #9d72ff;
+  border: 1.5px solid rgb(157, 114, 255);
   box-shadow: 3px 6px 18px rgba(0, 0, 0, 0.26);
-  border-radius: 11px;
+  border-radius: 8px;
   padding: 0 0.1rem;
 }
 

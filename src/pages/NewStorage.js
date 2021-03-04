@@ -48,8 +48,6 @@ export const NewStorage = () => {
   const storageSubmitHundler = async (event) => {
     event.preventDefault();
 
-    console.log(formState.inputs);
-
     try {
       const formData = new FormData();
       formData.append('title', formState.inputs.title.value);
