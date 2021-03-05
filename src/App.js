@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -12,20 +12,30 @@ import { useAuth } from './shared/hooks/auth-hook';
 import {
   Storages,
   Storage,
-  NewStorage,
-  UpdateStorage,
-  StorageItems,
-  NewItem,
-  UpdateItem,
+  // NewStorage,
+  // UpdateStorage,
+  // StorageItems,
+  // NewItem,
+  // UpdateItem,
   // Statistics,
 } from './pages';
-import Statistics from './pages/Statistics';
+// import Statistics from './pages/Statistics';
 
-import Auth from './user/pages/Auth';
-import UserInfo from './user/pages/UserInfo';
+// import Auth from './user/pages/Auth';
+// import UserInfo from './user/pages/UserInfo';
 
 import { AuthContext } from './context/auth/Auth-context';
 import GlobalStateProvider from './context/storages/GlobalStateProvider';
+import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
+
+const NewStorage = React.lazy(() => import('./pages/NewStorage'));
+const UpdateStorage = React.lazy(() => import('./pages/UpdateStorage'));
+const StorageItems = React.lazy(() => import('./pages/StorageItems'));
+const NewItem = React.lazy(() => import('./pages/NewItem'));
+const UpdateItem = React.lazy(() => import('./pages/UpdateItem'));
+const Statistics = React.lazy(() => import('./pages/Statistics'));
+const UserInfo = React.lazy(() => import('./user/pages/UserInfo'));
+const Auth = React.lazy(() => import('./user/pages/Auth'));
 
 function App() {
   const { token, login, logout, userId, name } = useAuth();
@@ -99,7 +109,17 @@ function App() {
       >
         <Router>
           <MainNavigation />
-          <main>{routes}</main>
+          <main>
+            <Suspense
+              fallback={
+                <div className="center">
+                  <LoadingSpinner />
+                </div>
+              }
+            >
+              {routes}
+            </Suspense>
+          </main>
         </Router>
       </AuthContext.Provider>
     </GlobalStateProvider>
