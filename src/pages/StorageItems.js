@@ -79,7 +79,7 @@ export const StorageItems = (props) => {
 
       <div className="search-and-add ">
         <div
-          className="form-control storage-form"
+          className="form-control search-input"
           style={{ marginBottom: '2rem' }}
         >
           <input

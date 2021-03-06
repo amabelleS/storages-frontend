@@ -4,10 +4,23 @@
   align-content: center;
   justify-content: center;
   align-items: center;
+  /* margin-top: 0; */
+}
+
+.search-input {
+  position: relative;
+  list-style: none;
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 90%;
+  max-width: 40rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: white;
 }
 
 .items-actions {
-  margin: 1rem;
+  /* margin: 1rem; */
   border: 1px solid rgb(221, 87, 199);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;

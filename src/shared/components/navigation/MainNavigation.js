@@ -39,11 +39,11 @@ export const MainNavigation = (props) => {
         </button>
         <div className="main-navigation__title-group">
           <h1 className="main-navigation__title">
-            <Link to="/">למחסנים</Link>
-            {/* <Link to="/about">About community storages</Link> */}
+            <Link to="/about">About</Link>
           </h1>
           <h1 className="main-navigation__title">
-            <Link to="/about">About</Link>
+            <Link to="/">Storages</Link>
+            {/* <Link to="/about">About community storages</Link> */}
           </h1>
         </div>
         <nav className="main-navigation__header-nav">

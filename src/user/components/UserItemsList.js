@@ -21,7 +21,7 @@ export const UserItemsList = (props) => {
   }
 
   return (
-    <ul className="items-list">
+    <ul className="user-items-list">
       {props.items.map((item, index) => (
         <UserItem
           key={index}

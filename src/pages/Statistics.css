@@ -1,5 +1,5 @@
 .icons-plus-graph-container {
-  margin: 1rem;
+  margin: 6rem 1rem;
   border: 1px solid rgb(221, 87, 199);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
@@ -41,6 +41,7 @@
 
 .graph-container {
   padding: 1rem;
+  /* margin: 2rem; */
 }
 
 .graph-container:hover {

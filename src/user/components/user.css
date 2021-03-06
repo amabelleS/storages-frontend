@@ -17,6 +17,11 @@
   max-width: 40rem;
 }
 
+.user-items-list {
+  margin: 5rem 1rem;
+  padding: 0;
+}
+
 @media (max-width: 1331px) {
   .user-fix {
     margin-right: 11rem;
