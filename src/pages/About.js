@@ -20,22 +20,28 @@ const About = () => {
         time we'll start to re-think about our consumers habbits.
       </h2>
       <h2>
+        In order to reserve items, or open and manage a new storage, users have
+        to authenticate via email, extra.. The email and phone number are for
+        storage managers in order to confirm reservation, if wanted.
+      </h2>
+      <h2>
         You can manage your storage in different ways. Some base it all on
         trust, so there will be no deposit amount or rent cost. But there are
         storages that take into account that there will be some wear and tear.
-        So this app supports rent cost, but you don't have to use it. Same for
-        the deposit amount.
+        So this app supports rent cost, but as a manager you don't have to use
+        it. Same for the deposit amount.
       </h2>
       <h2>
         You can monitor and manage your storage with the help of the
-        <span>charts.</span>
+        <span>Charts.</span>
         There are two kind of managment support chart here.
         <span>Storage Items Count: </span>
         Every time you want to add a new node - it will show the current amount
         of items in the storage, and the current amount of items out.
-        <span>Income Charts: </span>two mode, the first presents income per day
-        for the last 30 days, the second will show the income per month. You can
-        print or save them to your local memory at any given time.
+        <span>Income Charts: </span>There are two modes, the first presents
+        income per day for the last 30 days, the second will show the income per
+        month. You can print or save them to your local memory at any given
+        time.
       </h2>
 
       <h3 className="my-linkedIn">
