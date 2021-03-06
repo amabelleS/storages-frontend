@@ -18,6 +18,12 @@
   margin: 0 1rem;
 }
 
+.main-navigation__title-group {
+  width: 15rem;
+  display: flex;
+  justify-content: space-between;
+}
+
 .main-navigation__title {
   color: #ff8fcf;
 }

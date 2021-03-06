@@ -37,9 +37,15 @@ export const MainNavigation = (props) => {
           <span />
           <span />
         </button>
-        <h1 className="main-navigation__title">
-          <Link to="/">למחסנים</Link>
-        </h1>
+        <div className="main-navigation__title-group">
+          <h1 className="main-navigation__title">
+            <Link to="/">למחסנים</Link>
+            {/* <Link to="/about">About community storages</Link> */}
+          </h1>
+          <h1 className="main-navigation__title">
+            <Link to="/about">About</Link>
+          </h1>
+        </div>
         <nav className="main-navigation__header-nav">
           <NavLinks />
         </nav>

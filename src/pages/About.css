@@ -1,0 +1,69 @@
+.img-container {
+  background: linear-gradient(
+      to bottom,
+      rgba(148, 252, 19, 0.8),
+      rgba(98, 195, 219, 0.8),
+      rgba(221, 87, 199, 0.5) /* rgba(255, 0, 200, 0.4) */
+    ),
+    url('https://res.cloudinary.com/db9i05s6n/image/upload/v1614988099/communityStorages/msvg8hwamirrqtqjtpph.jpg')
+      top;
+  background-size: cover;
+  background-origin: border-box;
+  background-attachment: scroll;
+  background-position: center;
+  background-clip: padding-box;
+  /* background-origin: padding-box; */
+  /* background-size: auto auto; */
+  background-repeat: no-repeat;
+  /* background-size: 6em auto; */
+  /* background-repeat: no-repeat round; */
+  height: 100vh;
+  width: 100vw;
+  /* background: linear-gradient(
+    to right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
+  /* background: white !important; */
+}
+
+.img-container h3 {
+  /* color: rgb(5, 223, 215); */
+  color: #3b064d;
+  margin: 2rem;
+  padding: 1rem;
+}
+.img-container h1 {
+  margin: 2rem;
+  padding: 1rem;
+  font-size: 2.8rem;
+  /* color: rgb(243, 41, 209); */
+  color: #ff00c8;
+  /* color: #fa26a0; */
+}
+.img-container h2 {
+  margin: 3rem;
+  padding: 1rem;
+  /* color: #472b62; */
+  color: #84253e;
+}
+
+.img-container h4 {
+  margin: 3rem;
+  padding: 1rem;
+  color: #fe59d7;
+  /* color: #ff009d; */
+}
+.img-container span {
+  /* margin: rem; */
+  padding: 1rem;
+}
+
+@media (max-width: 555px) {
+}

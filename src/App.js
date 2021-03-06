@@ -34,6 +34,7 @@ const StorageItems = React.lazy(() => import('./pages/StorageItems'));
 const NewItem = React.lazy(() => import('./pages/NewItem'));
 const UpdateItem = React.lazy(() => import('./pages/UpdateItem'));
 const Statistics = React.lazy(() => import('./pages/Statistics'));
+const About = React.lazy(() => import('./pages/About'));
 const UserInfo = React.lazy(() => import('./user/pages/UserInfo'));
 const Auth = React.lazy(() => import('./user/pages/Auth'));
 
@@ -47,6 +48,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Storages />
+        </Route>
+        <Route exact path="/about">
+          <About />
         </Route>
         <Route exact path="/userInfo/:uid">
           <UserInfo />
@@ -83,6 +87,9 @@ function App() {
         </Route>
         <Route exact path="/auth">
           <Auth />
+        </Route>
+        <Route exact path="/about">
+          <About />
         </Route>
         <Route exact path="/:sid">
           <Storage />
