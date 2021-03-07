@@ -1,8 +1,16 @@
 The frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). mern-stack. 
 
-## Available features
+# Available features
 
-....
+Users can search for storages by there name, descriotion, or adress (google maps supported), and obseeve each storage items
+
+### After authentication
+
+Users can reserve items, or add there own new storage. it could be any kind of community storage you want it to be:) A manager will be able to edit his storage, add new items, observe and manage the storage charts, and manage the reservation process.
+
+### STORAGE ITEMS
+
+...
 
 ### storage items
 
