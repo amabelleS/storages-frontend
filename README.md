@@ -1,6 +1,6 @@
-The frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). mern-stack. 
+The frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
 
-# Available features
+# Community Storages - My First Mern-Stack App
 
 Users can search for storages by there name, descriotion, or adress (google maps supported), and obseeve each storage items
 
