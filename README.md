@@ -6,32 +6,26 @@ Users can search for storages by there name, descriotion, or adress (google maps
 
 ### After authentication
 
-Users can reserve items, or add there own new storage. it could be any kind of community storage you want it to be:) A manager will be able to edit his storage, add new items, observe and manage the storage charts, and manage the reservation process.
+Users can reserve items, manage there on-reserved items list, or add there own new storage. it could be any kind of community storage you want it to be:) 
 
-### STORAGE ITEMS
+## STORAGE ITEMS
+
+A manager will be able to edit his storage, add new items, edit them and manage the reservation process.
+
+## STORAGE CHARTS
+
+A storage manager can observe and manage his/hers storage charts (canvasjs:). There are to kinds: 1.ITEMS COUNT - every time a manager choses yo add a new node, it will dinamicly insert a new node to a (two) line chart, that will represent the current (todays date on the x axis) count of total items in the storage, and the total amount of items currently out of the storage by the users. 2.INCOME CHARTS: comes in two modes: 1. income per day for the last 30 days. 2. income per month.
+You can print or save a copy of the charts at any given time. 
+
+### State Manegment
 
 ...
 
-### storage items
+### User Experience
 
-Users can (after authntication) reseve items the find in a storage that they wish to borrow
+...
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
+### About this project
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
