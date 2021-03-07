@@ -4,7 +4,7 @@ The frontend was bootstrapped with [Create React App](https://github.com/faceboo
 
 https://community-storages.web.app/
 
-Users can search for storages by there name, descriotion, or adress (google maps supported), and obseeve each storage items
+Users can search for storages by their name, descriotion, or adress (google maps supported), and obseeve each storage items
 
 ## Storages
 
