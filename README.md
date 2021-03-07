@@ -2,6 +2,8 @@ The frontend was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Community Storages - My First Mern-Stack App
 
+https://community-storages.web.app/
+
 Users can search for storages by there name, descriotion, or adress (google maps supported), and obseeve each storage items
 
 ### After authentication
