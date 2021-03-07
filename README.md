@@ -6,26 +6,26 @@ https://community-storages.web.app/
 
 Users can search for storages by there name, descriotion, or adress (google maps supported), and obseeve each storage items
 
-### After authentication
+## Storages
 
-Users can reserve items, manage there on-reserved items list, or add there own new storage. it could be any kind of community storage you want it to be:) 
+After authentication, users can reserve items, manage there on-reserved items list, or add there own new storage. it could be any kind of community storage you want it to be:) 
 
-## STORAGE ITEMS
+## Storage Items
 
 A manager will be able to edit his storage, add new items, edit them and manage the reservation process.
 
-## STORAGE CHARTS
+## Storage Charts
 
-A storage manager can observe and manage his/hers storage charts (canvasjs:). There are to kinds: 1.ITEMS COUNT - every time a manager choses yo add a new node, it will dinamicly insert a new node to a (two) line chart, that will represent the current (todays date on the x axis) count of total items in the storage, and the total amount of items currently out of the storage by the users. 2.INCOME CHARTS: comes in two modes: 1. income per day for the last 30 days. 2. income per month.
+A storage manager can observe and manage his/hers storage charts (canvasjs, modified to functional components). There are to kinds: 1.ITEMS COUNT - every time a manager choses yo add a new node, it will dinamicly insert a new node to a (two) line chart, that will represent the current (todays date on the x axis) count of total items in the storage, and the total amount of items currently out of the storage by the users. 2.INCOME CHARTS: comes in two modes: 1. income per day for the last 30 days. 2. income per month.
 You can print or save a copy of the charts at any given time. 
 
-### State Manegment
+### Global State Managment
 
-...
+By useContext & useReducer only:) 
 
 ### User Experience
 
-...
+It's a colorfull playgroud, no gray shades:) The use of colors is ment to draw the user attention were needed. pure css.
 
 ### About this project
 
