@@ -1,68 +1,43 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
 
-## Available Scripts
+# Community Storages - My First Mern-Stack App
 
-In the project directory, you can run:
+https://community-storages.web.app/
 
-### `npm start`
+Users can search for storages by their name, description, or address (google maps supported), and obseeve each storage items
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Storages
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+After authentication, users can reserve items, manage there on-reserved items list, or add there own new storage. it could be any kind of community storage you want it to be:) 
 
-### `npm test`
+## Storage Items
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A manager will be able to edit his storage, add new items, edit them and manage the reservation process.
 
-### `npm run build`
+## Storage Charts
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A storage manager can observe and manage his/hers storage charts (canvasjs, modified to functional components). There are to kinds: 1.ITEMS COUNT - every time a manager choses yo add a new node, it will dinamicly insert a new node to a (two) line chart, that will represent the current (todays date on the x axis) count of total items in the storage, and the total amount of items currently out of the storage by the users. 2.INCOME CHARTS: comes in two modes: 1. income per day for the last 30 days. 2. income per month.
+You can print or save a copy of the charts at any given time. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Global State Managment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+By useContext & useReducer only:) 
 
-### `npm run eject`
+### User Experience
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+It's a colorfull playgroud, no gray shades:) The use of colors is ment to draw the user attention were needed. pure css.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### About this project
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Community storages is A New Playground:) Were you can find different kind of storages, reserve items you want to borrow, or open and manage a new storage. If it's a tools storage, costumes or toys - anything you want. It's my first mern-stack app that I built for the community, and it's free:) I built this app, becuase there are thing we don't have to bye, that we can share. Becouse it's time we'll start to re-think about our consumers habbits. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**My Next Project**
 
-## Learn More
+Will be for community gardeners:)
+
+## About React
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
