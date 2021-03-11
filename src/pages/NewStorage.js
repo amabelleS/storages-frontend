@@ -31,6 +31,10 @@ export const NewStorage = () => {
         value: '',
         isValid: false,
       },
+      link: {
+        value: '',
+        isValid: false,
+      },
       address: {
         value: '',
         isValid: false,
@@ -52,6 +56,7 @@ export const NewStorage = () => {
       const formData = new FormData();
       formData.append('title', formState.inputs.title.value);
       formData.append('description', formState.inputs.description.value);
+      formData.append('link', formState.inputs.link.value);
       formData.append('address', formState.inputs.address.value);
       formData.append('image', formState.inputs.image.value);
       // formData.append('creator', auth.userId);
@@ -87,6 +92,14 @@ export const NewStorage = () => {
           label="Description"
           validators={[VALIDATOR_MINLENGTH(5)]}
           errorText="Please enter a valid title."
+          onInput={inputHandler}
+        />
+        <Input
+          id="link"
+          type="text"
+          label="Link to your website or facebook page (optional)"
+          validators={[VALIDATOR_MINLENGTH(5)]}
+          errorText="Please enter a valid link."
           onInput={inputHandler}
         />
         <Input

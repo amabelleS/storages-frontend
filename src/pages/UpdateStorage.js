@@ -32,6 +32,7 @@ export const UpdateStorage = () => {
     {
       title: { value: '', isValid: false },
       description: { value: '', isValid: false },
+      link: { value: '', isValid: false },
     },
     false
   );
@@ -44,6 +45,7 @@ export const UpdateStorage = () => {
         {
           title: { value: identifiedStorage.title, isValid: true },
           description: { value: identifiedStorage.description, isValid: true },
+          link: { value: identifiedStorage.link, isValid: true },
         },
         true
       );
@@ -63,6 +65,7 @@ export const UpdateStorage = () => {
         JSON.stringify({
           title: formState.inputs.title.value,
           description: formState.inputs.description.value,
+          link: formState.inputs.link.value,
         }),
         {
           'Content-Type': 'application/json',
@@ -115,6 +118,16 @@ export const UpdateStorage = () => {
             errorText="Please enter a valid description (min. 5 characters)."
             onInput={inputHandler}
             initialValue={storage.description}
+            initialValid={true}
+          />
+          <Input
+            id="link"
+            type="textarea"
+            label="Link"
+            validators={[VALIDATOR_MINLENGTH(5)]}
+            errorText="Please enter a valid link."
+            onInput={inputHandler}
+            initialValue={storage.link}
             initialValid={true}
           />
           <Button type="submit" disabled={!formState.isValid}>

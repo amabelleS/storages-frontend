@@ -55,6 +55,7 @@ export const Auth = () => {
           name: undefined,
           IDnum: undefined,
           phoneNum: undefined,
+          facebookName: undefined,
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
@@ -71,6 +72,10 @@ export const Auth = () => {
           //   isValid: false,
           // },
           phoneNum: {
+            value: '',
+            isValid: false,
+          },
+          facebookName: {
             value: '',
             isValid: false,
           },
@@ -115,6 +120,7 @@ export const Auth = () => {
             name: formState.inputs.name.value,
             // IDnum: formState.inputs.IDnum.value,
             phoneNum: formState.inputs.phoneNum.value,
+            facebookName: formState.inputs.facebookName.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
@@ -146,6 +152,15 @@ export const Auth = () => {
                 label="Your Name"
                 validators={[VALIDATOR_REQUIRE()]}
                 errorText="Please enter your full name."
+                onInput={inputHandler}
+              />
+              <Input
+                element="input"
+                id="facebookName"
+                type="text"
+                label="Your Name As in facebook - Optional, for some storages contact use"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter your facebook name."
                 onInput={inputHandler}
               />
               {/* <Input

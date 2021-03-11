@@ -138,6 +138,11 @@ export const Storage = (props) => {
               <Button danger onClick={openItemList}>
                 STORAGE ITEMS
               </Button>
+              {storage.link && (
+                <Button out href={storage.link}>
+                  To website/facebook
+                </Button>
+              )}
             </div>
             {auth.userId === storage.creator && (
               <div className="storage-container__actions">

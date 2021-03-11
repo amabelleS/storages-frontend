@@ -296,6 +296,12 @@ const ItemDetails = (props) => {
             Phon Number:{' '}
             {item && item.reservedByDetails && item.reservedByDetails.phoneNum}
           </p>
+          <p>
+            facebook Name:{' '}
+            {item &&
+              item.reservedByDetails &&
+              item.reservedByDetails.facebookName}
+          </p>
         </Modal>
       )}
 

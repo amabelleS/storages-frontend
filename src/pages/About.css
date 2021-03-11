@@ -13,8 +13,8 @@
   background-position: center;
   background-clip: padding-box;
   background-repeat: no-repeat;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 
   /* -webkit-background-clip: text; */
   /* -webkit-text-fill-color: transparent; */
@@ -69,5 +69,5 @@
   padding: 1rem;
 }
 
-@media (max-width: 555px) {
+@media (max-width: 1111px) {
 }

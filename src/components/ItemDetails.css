@@ -111,7 +111,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
   background: rgba(190, 46, 154, 0.1);
-  width: 11.1rem;
+  width: 12rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -133,7 +133,7 @@
 
 @media (max-width: 1331px) {
   .item {
-    width: 49.3vw;
+    width: 66vw;
     margin: 0.2rem auto;
     display: flex;
     flex-direction: column;
@@ -147,7 +147,7 @@
   }
   .grouped_actions {
     margin: 0.2rem;
-    width: 11rem;
+    width: 13rem;
   }
 
   .cost {
