@@ -333,18 +333,14 @@ const ItemDetails = (props) => {
               </div>
             )}
             <div className="cost">
-              {props.rentCost && (
-                <p className="item-details cost rent">
-                  <strong>Rent cost:</strong>{' '}
-                  <span className="color">{props.rentCost}</span>
-                </p>
-              )}
+              <p className="item-details cost rent">
+                <strong>Rent cost:</strong>{' '}
+                <span className="color">{item && item.rentCost}</span>
+              </p>
 
               <p className="item-details cost deposit">
                 <strong>Deposit Amount:</strong>{' '}
-                <span className="color">
-                  {item && item.depositAmount && item.depositAmount}
-                </span>
+                <span className="color">{item && item.depositAmount}</span>
               </p>
             </div>
           </div>
