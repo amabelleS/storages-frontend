@@ -140,6 +140,7 @@ export const Storage = (props) => {
               </Button>
               {storage.link && (
                 <Button out href={storage.link}>
+                  {/* {storage.link} */}
                   To website/facebook
                 </Button>
               )}

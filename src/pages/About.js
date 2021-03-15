@@ -4,6 +4,7 @@ import './About.css';
 
 const About = () => {
   const url = 'https://www.linkedin.com/in/amabelle-trachtenberg/';
+  const myEmail = 'amabelletr@gmail.com';
 
   return (
     // <React.Fragment>
@@ -42,6 +43,12 @@ const About = () => {
         income per day for the last 30 days, the second will show the income per
         month. You can print or save them to your local memory at any given
         time.
+      </h2>
+      <h2>
+        If you want to open a storage and you have more questions, you can mail
+        me for support to: {/* <address> */}
+        <a href={'mailto:' + myEmail}> Storages Support Email</a>
+        {/* </address> */}
       </h2>
 
       <h3 className="my-linkedIn">
