@@ -3,6 +3,10 @@
   /* width: calc(48% - 1rem); */
   width: 42em;
   min-width: 17.5rem;
+  border: 1px solid rgb(221, 87, 199);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: rgba(240, 228, 237, 0.2);
 }
 
 .info-items {
@@ -17,12 +21,18 @@
   height: 100%;
   text-decoration: none;
   padding: 1rem;
-  background: #292929;
+  /* background: #292929; */
+
+  /* background: rgba(180, 126, 179, 0.5); */
+  /* background: rgba(213, 245, 182, 0.4); */
 }
 
 .storage-item a:hover,
 .storage-item a:active {
-  background: #ff009d;
+  /* background: #ff009d; */
+  /* background: rgb(180, 126, 179); */
+  border: 1px solid #08f7fb;
+  background: rgba(213, 245, 182, 0.4);
 }
 
 .storage-item__content {
@@ -37,23 +47,26 @@
   font-size: 1.8rem;
   margin: 1rem 0 0.5rem 0;
   font-weight: bold;
-  color: #fa26a0;
+  /* color: #fa26a0; */
+  color: #560a86;
 }
 
 .info-items h3 {
   font-size: 1.3rem;
   margin: 1rem 0 0.5rem 0;
   font-weight: normal;
-  color: rgb(5, 223, 215);
+  /* color: rgb(5, 223, 215); */
+  color: #08f7fe;
 }
 
 .info-items:hover h2,
 .info-items:active h2 {
-  color: #350b40;
+  /* color: #350b40; */
+  /* color: #560a86; */
 }
 .info-items:hover h3,
 .info-items:active h3 {
-  color: #fdf200;
+  /* color: #fdf200; */
 }
 
 .scroll-container {
@@ -67,7 +80,8 @@
   width: 16.6em;
   height: 6em;
   padding: 1rem 1rem;
-  color: #00ff40;
+  /* color: #00ff40; */
+  color: rgb(99, 245, 104);
 }
 
 @media (min-width: 768px) {

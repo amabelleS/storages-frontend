@@ -145,24 +145,28 @@ export const Auth = () => {
         <form onSubmit={authSubmitHandler}>
           {!isLoginMode && (
             <React.Fragment>
-              <Input
-                element="input"
-                id="name"
-                type="text"
-                label="Your Name"
-                validators={[VALIDATOR_REQUIRE()]}
-                errorText="Please enter your full name."
-                onInput={inputHandler}
-              />
-              <Input
-                element="input"
-                id="facebookName"
-                type="text"
-                label="Your Name As in facebook - Optional, for some storages contact use"
-                validators={[VALIDATOR_REQUIRE()]}
-                errorText="Please enter your facebook name."
-                onInput={inputHandler}
-              />
+              <div className="auth-input">
+                <Input
+                  element="input"
+                  id="name"
+                  type="text"
+                  label="Your Name"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  errorText="Please enter your full name."
+                  onInput={inputHandler}
+                />
+              </div>
+              <div className="auth-input">
+                <Input
+                  element="input"
+                  id="facebookName"
+                  type="text"
+                  label="Your Name As in facebook - Optional, for some storages contact use"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  errorText="Please enter your facebook name."
+                  onInput={inputHandler}
+                />
+              </div>
               {/* <Input
                 element="input"
                 id="IDnum"
@@ -172,36 +176,41 @@ export const Auth = () => {
                 errorText="Please enter your ID number."
                 onInput={inputHandler}
               /> */}
-              <Input
-                element="input"
-                id="phoneNum"
-                type="tel"
-                label="Phone Number"
-                validators={[VALIDATOR_REQUIRE()]}
-                errorText="Please enter your phone number."
-                onInput={inputHandler}
-              />
+              <div className="auth-input">
+                <Input
+                  element="input"
+                  id="phoneNum"
+                  type="tel"
+                  label="Phone Number"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  errorText="Please enter your phone number."
+                  onInput={inputHandler}
+                />
+              </div>
             </React.Fragment>
           )}
-          <Input
-            element="input"
-            id="email"
-            type="email"
-            label="E-Mail"
-            validators={[VALIDATOR_EMAIL()]}
-            errorText="Please enter a valid e-mail address."
-            onInput={inputHandler}
-          />
-          <Input
-            element="input"
-            id="password"
-            type="password"
-            label="Password"
-            validators={[VALIDATOR_MINLENGTH(6)]}
-            errorText="Please enter a valid password, at least 6 characters."
-            onInput={inputHandler}
-          />
-
+          <div className="auth-input">
+            <Input
+              element="input"
+              id="email"
+              type="email"
+              label="E-Mail"
+              validators={[VALIDATOR_EMAIL()]}
+              errorText="Please enter a valid e-mail address."
+              onInput={inputHandler}
+            />
+          </div>
+          <div className="auth-input">
+            <Input
+              element="input"
+              id="password"
+              type="password"
+              label="Password"
+              validators={[VALIDATOR_MINLENGTH(6)]}
+              errorText="Please enter a valid password, at least 6 characters."
+              onInput={inputHandler}
+            />
+          </div>
           <Button type="submit" disabled={!formState.isValid}>
             {isLoginMode ? 'LOGIN' : 'SIGNUP'}
           </Button>

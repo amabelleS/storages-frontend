@@ -1,13 +1,37 @@
-.authentication__header {
-  color: white;
-  text-align: center;
-}
-
 .authentication {
+  color: #08f7fe;
   width: 90%;
   max-width: 25rem;
   margin: 7rem auto;
   text-align: center;
+  border: 1px solid rgb(221, 87, 199);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: rgba(240, 228, 237, 0.2);
+}
+
+.authentication:hover {
+  border: 1px solid #08f7fb;
+  background: rgba(213, 245, 182, 0.4);
+}
+
+.authentication input {
+  font-size: 1.3rem;
+  font-weight: 515;
+  padding: 0.4rem;
+  border-radius: 4px;
+}
+
+.auth-input {
+  position: relative;
+  list-style: none;
+  padding: 0.4rem;
+  margin: 0.1rem auto;
+  /* width: 99%; */
+  /* max-width: 40rem; */
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26); */
+  border-radius: 6px;
+  /* background: white; */
 }
 
 .authentication form {
