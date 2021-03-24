@@ -1,5 +1,3 @@
-The frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
-
 # Community Storages - My First Mern-Stack App
 
 https://community-storages.web.app/
