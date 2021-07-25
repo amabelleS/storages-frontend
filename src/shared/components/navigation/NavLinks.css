@@ -9,37 +9,54 @@
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
-  font-weight: 525;
+  font-weight: 420;
 }
 
 .nav-links li {
   margin: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .nav-links a {
-  border: 1px solid transparent;
-  color: #292929;
+  /* border: 1px solid transparent; */
+  color: #01ffff;
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-.nav-links a:hover,
+/* .nav-links a span {
+  padding-left: 0.5rem;
+} */
+
+.nav-links li:hover,
+ .nav-links li:active {
+  background: #9d72ff;
+  /* color: #9d72ff; */
+  /* border: 1px solid #9d72ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px; */
+  transition: all .2s;
+}
+
+/* .nav-links a:hover,
 .nav-links a:active,
 .nav-links a.active {
   background: #01ffff;
   color: #9d72ff;
-  border: 1px solid #9d72ff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 6px;
-}
-
+  transform: all .2s;
+} */
+/* 
 .nav-links button {
   cursor: pointer;
-  border: 1px solid #292929;
-  color: #292929;
   background: transparent;
   padding: 0.5rem;
   font: inherit;
+  border: none;
 }
 
 .nav-links button:focus {
@@ -48,8 +65,16 @@
 
 .nav-links button:hover,
 .nav-links button:active {
+
   background: #292929;
   color: white;
+} */
+
+.active {
+  background: #9d72ff;
+  /* color: #9d72ff; */
+  /* transform: all .2s; */
+  transition: all .2s;
 }
 
 @media (min-width: 768px) {
@@ -62,11 +87,15 @@
   }
 
   .nav-links a {
-    color: #ff8fcf;
+    color: #01ffff;
     text-decoration: none;
   }
 
-  .nav-links button {
+  .nav-links a span {
+  padding-left: 0.5rem;
+}
+
+  /* .nav-links button {
     border: 1px solid rgb(221, 87, 199);
     margin: 0.5rem 0.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -79,5 +108,5 @@
   .nav-links button:active {
     background: #01ffff;
     color: #9d72ff;
-  }
+  } */
 }

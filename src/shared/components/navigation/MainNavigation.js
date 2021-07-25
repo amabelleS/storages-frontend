@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import MainHeader from './MainHeader';
 import NavLinks from './NavLinks';
@@ -39,10 +39,10 @@ export const MainNavigation = (props) => {
         </button>
         <div className="main-navigation__title-group">
           <div className="main-navigation__title">
-            <Link to="/about">About</Link>
+            <NavLink activeClassName="active" to="/about" exact>About</NavLink>
           </div>
           <div className="main-navigation__title">
-            <Link to="/">Storages</Link>
+            <NavLink activeClassName="active" to="/" exact>Storages</NavLink>
           </div>
         </div>
         <nav className="main-navigation__header-nav">

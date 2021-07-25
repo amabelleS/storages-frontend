@@ -19,19 +19,17 @@
 }
 
 .main-navigation__title-group {
-  width: 11rem;
+  /* width: 11rem; */
   display: flex;
-  /* justify-content: space-between; */
   height: 100%;
 }
 
 .main-navigation__title {
-  color: #01ffff;
+  /* color: #01ffff; */
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 420;
   display: flex;
-  /* padding-left: 2rem; */
-  padding: 0 2rem;
+  padding: 0 0.2rem;
   align-items: center;
   cursor: pointer;
 }
@@ -42,17 +40,11 @@
   height: 100%;
   display: flex;
   align-items: center;
-}
-
-.main-navigation__title:hover {
-  background: rgb(1, 255, 255);
-  /* color: #9d72ff; */
-  transition: all .2s;
+  padding: 1rem;
 }
 
 .main-navigation__title a:hover {
-  /* background: rgb(1, 255, 255); */
-  color: #9d72ff;
+  background: #9d72ff;
   transition: all .2s;
 }
 
