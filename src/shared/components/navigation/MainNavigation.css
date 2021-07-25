@@ -44,7 +44,8 @@
 }
 
 .main-navigation__title a:hover {
-  background: #9d72ff;
+  background: #644834;
+  /* background: #9d72ff; */
   transition: all .2s;
 }
 
