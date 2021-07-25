@@ -43,7 +43,6 @@ export const MainNavigation = (props) => {
           </h1>
           <h1 className="main-navigation__title">
             <Link to="/">Storages</Link>
-            {/* <Link to="/about">About community storages</Link> */}
           </h1>
         </div>
         <nav className="main-navigation__header-nav">

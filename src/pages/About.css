@@ -1,9 +1,26 @@
 .about-container {
-  background: linear-gradient(
-      to bottom,
+  /* background: conic-gradient(
+      from -90deg at 25% 115%,
+      rgba(255, 0, 0, 0.88),
+      rgba(255, 0, 102, 0.9),
+      #ff00cc,
+      #cc00ff,
+      #6600ff,
+      #0000ff,
+      #0000ff,
+      #0000ff,
+      #0000ff
+    ),
+    url('https://res.cloudinary.com/db9i05s6n/image/upload/v1614988099/communityStorages/msvg8hwamirrqtqjtpph.jpg')
+      top; */
+
+  background: conic-gradient(
+      from -90deg at 25% 115%,
       rgba(148, 252, 19, 0.88),
       rgba(98, 195, 219, 0.8),
-      rgba(221, 87, 199, 0.88) /* rgba(255, 0, 200, 0.4) */
+      rgba(221, 87, 199, 0.88),
+      rgba(255, 0, 0, 0.88),
+      rgba(255, 0, 102, 0.9)
     ),
     url('https://res.cloudinary.com/db9i05s6n/image/upload/v1614988099/communityStorages/msvg8hwamirrqtqjtpph.jpg')
       top;

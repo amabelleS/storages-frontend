@@ -74,7 +74,7 @@ const About = () => {
       </h2>
 
       <h3 className="my-linkedIn">
-        If you know about an open position for a web developer, please hook us
+        If you know about an open position for a Full-Stack developer, please hook us
         up
         <span>
           <a href={url}>My LinkedIn</a>
