@@ -94,7 +94,7 @@ export const Storages = () => {
         <input
           className="search"
           type="text"
-          placeholder="Search by title or address, or description"
+          placeholder="Search a storage by his title, address or description"
           value={searchTerm}
           onChange={handleChange}
         />

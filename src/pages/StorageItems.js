@@ -84,8 +84,8 @@ export const StorageItems = (props) => {
         >
           <input
             type="text"
-            placeholder={`Search by item name or description ${
-              storage.creator === auth.userId && `or sirial number`
+            placeholder={`Search by item's name / description ${
+              storage.creator === auth.userId && ` / sirial number`
             }`}
             value={searchTerm}
             onChange={handleChange}
