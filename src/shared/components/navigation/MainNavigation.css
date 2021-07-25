@@ -21,30 +21,44 @@
 .main-navigation__title-group {
   width: 11rem;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  height: 100%;
 }
 
 .main-navigation__title {
-  color: #ff8fcf;
-  font-size: 1.3rem;
+  color: #01ffff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  /* padding-left: 2rem; */
+  padding: 0 2rem;
+  align-items: center;
+  cursor: pointer;
 }
 
 .main-navigation__title a {
   text-decoration: none;
-  color: #ff8fcf;
+  color: #01ffff;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.main-navigation__title:hover {
+  background: rgb(1, 255, 255);
+  /* color: #9d72ff; */
+  transition: all .2s;
 }
 
 .main-navigation__title a:hover {
-  background: rgb(1, 255, 255);
+  /* background: rgb(1, 255, 255); */
   color: #9d72ff;
-  border: 1.5px solid rgb(157, 114, 255);
-  box-shadow: 3px 6px 18px rgba(0, 0, 0, 0.26);
-  border-radius: 8px;
-  padding: 0 0.1rem;
+  transition: all .2s;
 }
 
 .main-navigation__header-nav {
   display: none;
+  height: 100%;
 }
 
 .main-navigation__drawer-nav {

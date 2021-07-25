@@ -38,12 +38,12 @@ export const MainNavigation = (props) => {
           <span />
         </button>
         <div className="main-navigation__title-group">
-          <h1 className="main-navigation__title">
+          <div className="main-navigation__title">
             <Link to="/about">About</Link>
-          </h1>
-          <h1 className="main-navigation__title">
+          </div>
+          <div className="main-navigation__title">
             <Link to="/">Storages</Link>
-          </h1>
+          </div>
         </div>
         <nav className="main-navigation__header-nav">
           <NavLinks />
