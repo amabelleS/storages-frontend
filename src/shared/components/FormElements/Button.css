@@ -39,8 +39,9 @@
 }
 
 .button--danger {
-  background: #fe1c80;
-  border-color: #fb33db;
+  /* background: #fe1c80; */
+  background: #FF4500;
+  border-color: #791d69;
 }
 
 .button--enter {

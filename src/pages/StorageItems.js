@@ -100,7 +100,7 @@ export const StorageItems = (props) => {
               BACK TO STORAGE
             </Button>
             {auth.userId === fetchedStorage.creator && (
-              <Button to={`/${fetchedStorage.id}/statistics`}>
+              <Button stat to={`/${fetchedStorage.id}/statistics`}>
                 Total: {storageItems.length} | show charts
               </Button>
             )}
@@ -111,7 +111,6 @@ export const StorageItems = (props) => {
             )}
             {auth.userId === fetchedStorage.creator && (
               <Button
-                stat
                 onClick={() => setOnlyReservedMode(!onlyReservedMode)}
               >
                 {onlyReservedMode ? 'Show All' : 'Show Reserved Items'}

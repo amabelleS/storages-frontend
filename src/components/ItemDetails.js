@@ -164,7 +164,7 @@ const ItemDetails = (props) => {
 
   const outInButton =
     item && item.out ? (
-      <Button stat big onClick={showInHandler}>
+      <Button out big onClick={showInHandler}>
         IN
       </Button>
     ) : (
@@ -221,7 +221,7 @@ const ItemDetails = (props) => {
             <Button inverse onClick={cancelReserveHandler}>
               CANCEL
             </Button>
-            <Button danger onClick={confirmResrveHandler}>
+            <Button out onClick={confirmResrveHandler}>
               {reserve ? 'RESERVE' : 'UNRESERVE'}
             </Button>
           </React.Fragment>
@@ -350,7 +350,7 @@ const ItemDetails = (props) => {
                 <Button enter to={`/${storage.id}/items/${props.id}/update`}>
                   EDIT
                 </Button>
-                <Button onClick={showDeleteWarningHandler}>DELETE</Button>
+                <Button danger onClick={showDeleteWarningHandler}>DELETE</Button>
               </div>
             )}
             {item && (
@@ -358,7 +358,6 @@ const ItemDetails = (props) => {
                 <Button
                   onClick={showReserveHandler}
                   disabled={!auth.isLoggedIn || !item.inStock}
-                  danger
                 >
                   {auth.isLoggedIn && item
                     ? item.inStock
@@ -385,7 +384,7 @@ const ItemDetails = (props) => {
                   item.reservedByDetails &&
                   auth.userId === props.adminId && (
                     <Button
-                      danger
+                      stat
                       onClick={showUserDetailHandler}
                       disabled={!auth.userId === props.adminId}
                     >

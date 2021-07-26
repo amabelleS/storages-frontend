@@ -135,7 +135,7 @@ export const Storage = (props) => {
               <Button inverse onClick={openMapHandler}>
                 VIEW ON MAP
               </Button>
-              <Button danger onClick={openItemList}>
+              <Button out onClick={openItemList}>
                 STORAGE ITEMS
               </Button>
               {storage.link && (
@@ -153,7 +153,7 @@ export const Storage = (props) => {
                 <Button enter to={`/${storage.id}/update`}>
                   EDIT
                 </Button>
-                <Button onClick={showDeleteWarningHandler}>
+                <Button danger onClick={showDeleteWarningHandler}>
                   DELETE STORAGE
                 </Button>
               </div>
