@@ -21,16 +21,10 @@
   height: 100%;
   text-decoration: none;
   padding: 1rem;
-  /* background: #292929; */
-
-  /* background: rgba(180, 126, 179, 0.5); */
-  /* background: rgba(213, 245, 182, 0.4); */
 }
 
 .storage-item a:hover,
 .storage-item a:active {
-  /* background: #ff009d; */
-  /* background: rgb(180, 126, 179); */
   border: 1px solid #08f7fb;
   background: rgba(213, 245, 182, 0.4);
 }
@@ -47,16 +41,15 @@
   font-size: 1.8rem;
   margin: 1rem 0 0.5rem 0;
   font-weight: bold;
-  /* color: #fa26a0; */
-  color: #560a86;
+  color: #3c074d;
 }
 
 .info-items h3 {
   font-size: 1.3rem;
   margin: 1rem 0 0.5rem 0;
   font-weight: normal;
-  /* color: rgb(5, 223, 215); */
-  color: #08f7fe;
+  /* color: #08f7fe; */
+  color: #01ffff;
 }
 
 .info-items:hover h2,
@@ -81,7 +74,8 @@
   height: 6em;
   padding: 1rem 1rem;
   /* color: #00ff40; */
-  color: rgb(99, 245, 104);
+  /* color: #63f568; */
+  color: #7fff00;
 }
 
 @media (min-width: 768px) {
