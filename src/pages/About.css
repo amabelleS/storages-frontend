@@ -1,19 +1,4 @@
 .about-container {
-  /* background: conic-gradient(
-      from -90deg at 25% 115%,
-      rgba(255, 0, 0, 0.88),
-      rgba(255, 0, 102, 0.9),
-      #ff00cc,
-      #cc00ff,
-      #6600ff,
-      #0000ff,
-      #0000ff,
-      #0000ff,
-      #0000ff
-    ),
-    url('https://res.cloudinary.com/db9i05s6n/image/upload/v1614988099/communityStorages/msvg8hwamirrqtqjtpph.jpg')
-      top; */
-
   background: conic-gradient(
       from -90deg at 25% 115%,
       rgba(148, 252, 19, 0.88),
@@ -32,9 +17,6 @@
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
-
-  /* -webkit-background-clip: text; */
-  /* -webkit-text-fill-color: transparent; */
 }
 
 .margin-top {
@@ -42,47 +24,37 @@
 }
 
 .my-linkedIn {
-  /* color: rgb(5, 223, 215); */
   color: #3b064d;
   margin: 3rem 6rem;
   padding: 1rem;
 }
 
 .my-linkedIn a {
-  /* color: rgb(5, 223, 215); */
-  color: #161d6f;
+  color: #3c074d;
 }
 
 .about-container h1 {
   margin: 2rem;
   padding: 1rem;
   font-size: 2.8rem;
-  /* color: rgb(243, 41, 209); */
-  color: #ff00c8;
-
-  /* color: #fa26a0; */
+  color: #8a0f84;
 }
 .about-container h2 {
   margin: 1rem 3rem;
   padding: 1rem;
-  /* color: #472b62; */
-  color: #84253e;
+  color: #644834;
 }
 
 .about-container h2 span {
-  /* color: #a7ff83; */
-  /* color: rgb(148, 252, 19); */
-  color: #a8ff3e;
+  color: #7fff00;
 }
 
-.about-container h4 {
-  margin: 3rem;
-  padding: 1rem;
-  color: #fe59d7;
-  /* color: #ff009d; */
+.about-container h2 a,
+.about-container h3 a {
+  color: #8a0f84;
 }
+
 .about-container span {
-  /* margin: rem; */
   padding: 1rem;
 }
 
