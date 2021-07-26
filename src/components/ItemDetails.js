@@ -168,7 +168,7 @@ const ItemDetails = (props) => {
         IN
       </Button>
     ) : (
-      <Button out big onClick={showOutHandler}>
+      <Button out big onClick={showOutHandler} disabled={item.inStock}>
         OUT
       </Button>
     );
@@ -365,15 +365,23 @@ const ItemDetails = (props) => {
                       : 'reserved'
                     : 'Sign in or register to reserve'}
                 </Button>
-                {auth.userId === props.adminId && (
+                {auth.userId === props.adminId ? !item.inStock ? 
                   <Button
                     onClick={showReserveHandler}
-                    disabled={!(auth.userId === props.adminId) || item.inStock}
+                    disabled={!(auth.userId === props.adminId) || item.inStock  }
+                    inverse
+                  >
+                    UNRESERVE
+                  </Button> : "": ""}
+                {/* {(auth.userId === props.adminId) && !item.inStock (
+                  <Button
+                    onClick={showReserveHandler}
+                    disabled={!(auth.userId === props.adminId) || item.inStock  }
                     inverse
                   >
                     UNRESERVE
                   </Button>
-                )}
+                )} */}
               </div>
             )}
 
