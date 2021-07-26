@@ -19,7 +19,8 @@
 .storage-container__info {
   padding: 1rem;
   text-align: center;
-  color: #560a86;
+  /* color: #560a86; */
+  color: #3c074d;
 }
 
 .storage-container__image {
@@ -35,12 +36,12 @@
 }
 
 .storage-container__info h3 {
-  color: #ff00ff;
+  color: #7fff00;
 }
 
 .storage-container__info p {
-  color: RGB(237, 201, 81);
-  color: #0ff0fc;
+  /* color: RGB(237, 201, 81); */
+  color: #01ffff;
 }
 
 .storage-container__info h2,
