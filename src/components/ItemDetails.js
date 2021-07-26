@@ -333,12 +333,12 @@ const ItemDetails = (props) => {
               </div>
             )}
             <div className="cost">
-              <p className="item-details cost rent">
+              <p className="item-details cost">
                 <strong>Rent cost:</strong>{' '}
                 <span className="color">{item && item.rentCost}</span>
               </p>
 
-              <p className="item-details cost deposit">
+              <p className="item-details cost">
                 <strong>Deposit Amount:</strong>{' '}
                 <span className="color">{item && item.depositAmount}</span>
               </p>

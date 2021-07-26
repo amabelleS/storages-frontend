@@ -90,18 +90,12 @@
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
-}
-.rent {
-  color: rgb(99, 245, 104);
-  /* color: #09fbd3; */
-}
-
-.deposit {
-  color: #09fbd3;
+  color: #28204f;
 }
 
 .color {
-  color: #fe53bb;
+  color:  #7fff00;
+  font-weight: 660;
 }
 
 .grouped_actions {
