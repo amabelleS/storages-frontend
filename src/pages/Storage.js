@@ -135,7 +135,7 @@ export const Storage = (props) => {
               <Button inverse onClick={openMapHandler}>
                 VIEW ON MAP
               </Button>
-              <Button out onClick={openItemList}>
+              <Button onClick={openItemList}>
                 STORAGE ITEMS
               </Button>
               {storage.link && (

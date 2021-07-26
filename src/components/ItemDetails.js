@@ -221,7 +221,7 @@ const ItemDetails = (props) => {
             <Button inverse onClick={cancelReserveHandler}>
               CANCEL
             </Button>
-            <Button out onClick={confirmResrveHandler}>
+            <Button onClick={confirmResrveHandler}>
               {reserve ? 'RESERVE' : 'UNRESERVE'}
             </Button>
           </React.Fragment>
@@ -243,7 +243,7 @@ const ItemDetails = (props) => {
             <Button inverse onClick={cancelOutHandler}>
               CANCEL
             </Button>
-            <Button danger onClick={confirmOutHandler}>
+            <Button onClick={confirmOutHandler}>
               Check item OUT
             </Button>
           </React.Fragment>
@@ -262,7 +262,7 @@ const ItemDetails = (props) => {
             <Button inverse onClick={cancelInHandler}>
               CANCEL
             </Button>
-            <Button danger onClick={confirmInHandler}>
+            <Button onClick={confirmInHandler}>
               Check item IN
             </Button>
           </React.Fragment>
