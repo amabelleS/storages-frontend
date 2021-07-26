@@ -364,7 +364,7 @@ const ItemDetails = (props) => {
                     ? item.inStock
                       ? 'RESERVE'
                       : 'שמור'
-                    : 'authenticate to reserve'}
+                    : 'Sign in or register to reserve'}
                 </Button>
                 {auth.userId === props.adminId && (
                   <Button
