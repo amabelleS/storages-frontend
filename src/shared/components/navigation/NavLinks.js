@@ -31,7 +31,7 @@ export const NavLinks = () => {
         <li className="nav_actions">
           <NavLink activeClassName="active" to="/auth">
             <i className="fas fa-key"></i>
-            <span> Sigh In </span>
+            <span> Sign In </span>
           </NavLink>
         </li>
       )}
