@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import TextTransition, { presets } from 'react-text-transition';
 
 import './LoadingSpinner.css';
@@ -7,10 +9,6 @@ const TEXTS = ['Colaboration', 'Inovation', 'Cooperation', 'Resource based econo
 
 const LoadingSpinner = props => {
   const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-      window.scrollTo(0, 0)
-  }, [])
 
   useEffect(() => {
     const intervalId = setInterval(
@@ -33,6 +31,16 @@ const LoadingSpinner = props => {
         You can login as: Email:<span> bobo@gmail.com</span>, Password:<span> bbbbbb </span> -
         To check the Demo storage full managment functiomalities.
         Please do not delete:)
+      </h2>
+      <h2>For more info, please check the 
+        <Link
+          to={{
+            pathname: '/about',
+            // hash: '.dashboard',
+          }}
+        >
+          About page
+        </Link>
       </h2>
       
       <TextTransition

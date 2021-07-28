@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './About.css';
 
 const About = () => {
   const url = 'https://www.linkedin.com/in/amabelle-trachtenberg/';
   const myEmail = 'amabelletr@gmail.com';
+
+  
+  useEffect(() => {
+      window.scrollTo(0, 0)
+  }, [])
 
   return (
     // <React.Fragment>

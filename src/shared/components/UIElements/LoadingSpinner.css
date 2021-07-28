@@ -35,6 +35,10 @@
   color: #01ffff;
 }
 
+.loader-text h1 {
+  color: #510077;
+}
+
 .loader-text h2{
   color: rgb(3, 160, 176);
   width: 80%;
@@ -45,11 +49,17 @@
   color: #01ffff;
 }
 
+.loader-text a{
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #01ffff;
+  cursor: pointer;
+}
+
 .about-text {
   font-size: 3rem;
-  color: #01ffff;
-  margin: 1rem auto;
-  /* text-align: center; */
+  color: #510077;
+  font-weight: bold;
   width: 50%;
 }
 

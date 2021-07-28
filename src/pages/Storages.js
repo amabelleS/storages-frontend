@@ -40,6 +40,11 @@ export const Storages = () => {
   //   },
   // ];
 
+  
+  useEffect(() => {
+      window.scrollTo(0, 0)
+  }, [])
+
   useEffect(() => {
     const fetchStorages = async () => {
       try {
