@@ -20,12 +20,37 @@
   height: 100%;
   width: 100%;
   position: absolute;
-  top: 0;
+  top: 4rem;
   left: 0;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.loader-text {
+  position: absolute;
+  top: 42%;
+  z-index: 100;
+  color: #01ffff;
+}
+
+.loader-text h2{
+  color: rgb(3, 160, 176);
+  width: 80%;
+  margin: 1rem auto;
+}
+
+.loader-text h2 span{
+  color: #01ffff;
+}
+
+.about-text {
+  font-size: 3rem;
+  color: #01ffff;
+  margin: 1rem auto;
+  /* text-align: center; */
+  width: 50%;
 }
 
 @keyframes lds-dual-ring {
@@ -35,4 +60,17 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+
+
+/* text transitoion overrides */
+
+.text-transition {
+  width: 100% !important;
+}
+.text-transition_inner {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: center;
 }
