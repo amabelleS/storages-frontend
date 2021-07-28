@@ -64,6 +64,11 @@ export const Storages = () => {
     };
     fetchStorages();
 
+    const timeout = setTimeout(() => {
+      fetchStorages();
+    }, 290000);
+
+    return () => clearTimeout(timeout);
     // eslint-disable-next-line
   }, [sendRequest, setLoadedStorages]);
 

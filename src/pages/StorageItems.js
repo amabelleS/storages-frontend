@@ -28,6 +28,11 @@ export const StorageItems = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading } = useHttpClient();
 
+  
+  // useEffect(() => {
+  //     window.scrollTo(0, 0)
+  // }, [])
+
   useEffect(() => {
     if (storage) {
       setfetchedStorage(storage);
