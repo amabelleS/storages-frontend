@@ -20,6 +20,7 @@ const LoadingSpinner = props => {
 
   return (
     <React.Fragment>
+      {props.isIntro && 
       <div className="loader-text">
       <h1>Community Storages</h1>
       <h2>
@@ -47,17 +48,9 @@ const LoadingSpinner = props => {
       text={TEXTS[index % TEXTS.length]}
       springConfig={presets.molasses}
       className="about-text"
-    />
-    
-      {/* <h2>
-      Were you can find different kind of storages, reserve items you want to
-      borrow, or open and manage a new storage. If it's a tools storage,
-      costumes or toys - anything you want. It's my first mern-stack app that
-      I built for the community, and it's free:) I built this app, becuase
-      there are thing we don't have to bye, that we can share. Becouse it's
-      time we'll start to re-think about our consumers habbits.
-      </h2> */}
-      </div>
+      />
+    </div>}
+
     <div className={`${props.asOverlay && 'loading-spinner__overlay'}`}>
      
       <div className="lds-dual-ring"></div>
