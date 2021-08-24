@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import TextTransition, { presets } from 'react-text-transition';
+// import TextTransition, { presets } from 'react-text-transition';
 
 import './LoadingSpinner.css';
 
-const TEXTS = ['Colaboration', 'Inovation', 'Cooperation', 'Resource based economy'];
+// const TEXTS = ['Colaboration', 'Inovation', 'Cooperation', 'Resource based economy'];
 
-const LoadingSpinner = props => {
-  const [index, setIndex] = useState(0);
+const LoadingSpinner = (props) => {
+  // const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    const intervalId = setInterval(
-      () => setIndex((index) => index + 1),
-      2000 // every 2 seconds
-    );
-    return () => clearTimeout(intervalId);
-    }, []);
+  // useEffect(() => {
+  //   const intervalId = setInterval(
+  //     () => setIndex((index) => index + 1),
+  //     2000 // every 2 seconds
+  //   );
+  //   return () => clearTimeout(intervalId);
+  //   }, []);
 
   return (
     <React.Fragment>
-      {props.isIntro && 
+      <div class="lds-heart">
+        <div></div>
+      </div>
+      {/* {props.isIntro && 
       <div className="loader-text">
       <h1>Community Storages</h1>
       <h2>
@@ -54,7 +57,7 @@ const LoadingSpinner = props => {
     <div className={`${props.asOverlay && 'loading-spinner__overlay'}`}>
      
       <div className="lds-dual-ring"></div>
-    </div>
+    </div> */}
     </React.Fragment>
   );
 };
