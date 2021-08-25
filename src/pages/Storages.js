@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import Context from '../context/storages/cotext';
 import { useHttpClient } from '../shared/hooks/http-hook';
@@ -6,6 +7,8 @@ import StorageList from '../components/StorageList';
 
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
+
+import './Storages.css';
 
 export const Storages = () => {
   const { globalDispatch } = useContext(Context);
@@ -40,10 +43,9 @@ export const Storages = () => {
   //   },
   // ];
 
-  
   useEffect(() => {
-      window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const fetchStorages = async () => {
@@ -64,7 +66,7 @@ export const Storages = () => {
     };
     fetchStorages();
 
-    // setTimeout every 29 minutes to restart heroku server - 
+    // setTimeout every 29 minutes to restart heroku server -
     // The free service shuts done the server every 30 minutes. Cutting done reloading time
     const timeout = setTimeout(() => {
       fetchStorages();
@@ -111,12 +113,46 @@ export const Storages = () => {
           onChange={handleChange}
         />
       </div>
+      {!isLoading && !LoadedStorages && (
+        <div className="heroku-down">
+          <h3>
+            From heroku logs: desc="Free app running time quota exhausted". Will
+            be up and running on September 1th:)
+          </h3>
+          <h1>Community Storages</h1>
+          <h2>
+            Were you can find different kind of storages, reserve items you want
+            to borrow, or open and manage a new storage. If it's a tools
+            storage, costumes or toys - anything you want.
+          </h2>
+          <h2>
+            For more info, please check the
+            <Link
+              to={{
+                pathname: '/about',
+                // hash: '.dashboard',
+              }}
+            >
+              About page
+            </Link>
+          </h2>
+        </div>
+      )}
       {!isLoading && LoadedStorages && (
         <StorageList
           items={searchResults.length > 0 ? searchResults : LoadedStorages}
         />
       )}
-      <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      <div>
+        Icons made by{' '}
+        <a href="https://www.freepik.com" title="Freepik">
+          Freepik
+        </a>{' '}
+        from{' '}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
     </React.Fragment>
   );
 };
