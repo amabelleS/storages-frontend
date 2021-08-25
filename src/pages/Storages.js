@@ -96,11 +96,7 @@ export const Storages = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      {isLoading && (
-        <div className="center">
-          {isLoading && <LoadingSpinner asOverlay isIntro />}
-        </div>
-      )}
+
       <div
         className="form-control storage-form search"
         style={{ marginBottom: '2rem' }}
@@ -113,6 +109,11 @@ export const Storages = () => {
           onChange={handleChange}
         />
       </div>
+      {isLoading && (
+        <div className="center">
+          {isLoading && <LoadingSpinner asOverlay isIntro />}
+        </div>
+      )}
       {!isLoading && !LoadedStorages && (
         <div className="heroku-down">
           <h3>
