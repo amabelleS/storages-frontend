@@ -28,7 +28,6 @@ export const StorageItems = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading } = useHttpClient();
 
-  
   // useEffect(() => {
   //     window.scrollTo(0, 0)
   // }, [])
@@ -81,7 +80,6 @@ export const StorageItems = (props) => {
   return (
     <React.Fragment>
       {/* <ErrorModal error={error} onClear={clearError} /> */}
-
       <div className="search-and-add ">
         <div
           className="form-control search-input"
@@ -89,9 +87,11 @@ export const StorageItems = (props) => {
         >
           <input
             type="text"
-            placeholder={`Search by item's name / description ${
-              storage.creator === auth.userId && ` / sirial number`
-            }`}
+            placeholder={
+              storage.creator !== auth.userId
+                ? `Search by item's name / description`
+                : `Search by item's name / description / sirial number`
+            }
             value={searchTerm}
             onChange={handleChange}
           />
@@ -115,9 +115,7 @@ export const StorageItems = (props) => {
               </Button>
             )}
             {auth.userId === fetchedStorage.creator && (
-              <Button
-                onClick={() => setOnlyReservedMode(!onlyReservedMode)}
-              >
+              <Button onClick={() => setOnlyReservedMode(!onlyReservedMode)}>
                 {onlyReservedMode ? 'Show All' : 'Show Reserved Items'}
               </Button>
             )}
