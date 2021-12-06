@@ -11,7 +11,7 @@ import Button from '../shared/components/FormElements/Button';
 
 import './StorageItems.css';
 
-export const StorageItems = (props) => {
+export const StorageItems = () => {
   const { globalState, globalDispatch } = useContext(Context);
   const { storage } = globalState;
   const [fetchedStorage, setfetchedStorage] = useState({});

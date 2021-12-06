@@ -96,7 +96,7 @@ const Statistics = () => {
       );
 
       globalDispatch({ type: 'set-storage', payload: responseData.storage });
-
+      localStorage.setItem('storage', JSON.stringify(responseData.storage));
       history.push(`/${storage.id}/statistics`);
     } catch (err) {}
   };

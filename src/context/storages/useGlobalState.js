@@ -3,10 +3,8 @@ import { useReducer } from 'react';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'set-storages':
-      localStorage.setItem('storages', JSON.stringify(action.payload));
       return { ...state, storages: action.payload };
     case 'set-storage':
-      localStorage.setItem('storage', JSON.stringify(action.payload));
       return { ...state, storage: action.payload };
     case 'set-userItems':
       return { ...state, userItems: action.payload };

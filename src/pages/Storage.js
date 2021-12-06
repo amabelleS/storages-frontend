@@ -35,7 +35,7 @@ export const Storage = (props) => {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + `/storages/${sid}`
         );
-
+        localStorage.setItem('storage', JSON.stringify(responseData.storage));
         globalDispatch({ type: 'set-storage', payload: responseData.storage });
       } catch (err) {}
     };
@@ -135,9 +135,7 @@ export const Storage = (props) => {
               <Button inverse onClick={openMapHandler}>
                 VIEW ON MAP
               </Button>
-              <Button onClick={openItemList}>
-                STORAGE ITEMS
-              </Button>
+              <Button onClick={openItemList}>STORAGE ITEMS</Button>
               {storage.link && (
                 <Button out href={storage.link}>
                   {/* {storage.link} */}

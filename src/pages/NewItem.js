@@ -77,6 +77,7 @@ export const NewItem = () => {
         }
       );
 
+      localStorage.setItem('storage', JSON.stringify(responseData.storage));
       globalDispatch({ type: 'set-storage', payload: responseData.storage });
       history.push(`/${sid}/items`);
     } catch (err) {}

@@ -55,7 +55,7 @@ export const Storages = () => {
         );
 
         setLoadedStorages(responseData.storages);
-
+        localStorage.setItem('storages', JSON.stringify(responseData.storages));
         globalDispatch({
           type: 'set-storages',
           payload: responseData.storages,
