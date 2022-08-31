@@ -66,13 +66,6 @@ export const Storages = () => {
     };
     fetchStorages();
 
-    // setTimeout every 29 minutes to restart heroku server -
-    // The free service shuts done the server every 30 minutes. Cutting done reloading time
-    const timeout = setTimeout(() => {
-      fetchStorages();
-    }, 290000);
-
-    return () => clearTimeout(timeout);
     // eslint-disable-next-line
   }, [sendRequest, setLoadedStorages]);
 
