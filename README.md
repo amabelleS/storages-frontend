@@ -1,8 +1,10 @@
 # Community Storages - My First Mern-Stack App
 
-https://community-storages.web.app/
-
 Users can search for storages by their name, description, or address (google maps supported), and obseeve each storage items
+
+## Link to website
+
+https://community-storages.web.app/
 
 ## Storages
 
