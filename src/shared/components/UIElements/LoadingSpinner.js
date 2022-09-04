@@ -5,7 +5,7 @@ import './LoadingSpinner.css';
 const LoadingSpinner = () => {
   return (
     <React.Fragment>
-      <div class="lds-heart">
+      <div className="lds-heart">
         <div></div>
       </div>
     </React.Fragment>
